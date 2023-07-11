@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { FiChevronDown, FiPlusSquare, FiMenu } from 'react-icons/fi';
+import { FiChevronDown, FiPlusSquare, FiMenu, FiColumns } from 'react-icons/fi';
 
 export const ProfileBody = ({
   name,
@@ -57,7 +57,7 @@ export const ProfileBody = ({
               borderRadius: '50%',
             }}
             alt="Profile"
-          />
+          /><br/>
           <span style={{ marginTop: 10, paddingTop: 5, fontWeight: 'bold' }}>
             {name}
           </span>
@@ -67,7 +67,7 @@ export const ProfileBody = ({
           <span>Posts</span>
         </div>
         <div style={{ alignItems: 'center' }}>
-          <span style={{ fontWeight: 'bold', fontSize: 18 }}>{followers}</span>
+          <span style={{ fontWeight: 'bold', fontSize: 18 }}>{followers}</span><br/>
           <span>Followers</span>
         </div>
         <div style={{ alignItems: 'center' }}>

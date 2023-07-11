@@ -44,8 +44,8 @@ const ProfileScreen = () => {
     <div style={{ width: '100%', height: '100%', backgroundColor: 'white'}}>
       <div style={{ width: '100%', padding: 20 }}>
         <ProfileBody
-          name="Mr Peobody"
-          accountName="mr_peobody"
+          name="Sohui Han"
+          accountName="xeesoxee"
           profileImage={"img/sohee.jpg"}
           followers="3.6M"
           following="35"
@@ -53,8 +53,8 @@ const ProfileScreen = () => {
         />
         <ProfileButtons
           id={0}
-          name="Mr Peobody"
-          accountName="mr_peobody"
+          name="Sohui Han"
+          accountName="xeesoxee"
           profileImage={"img/sohee.jpg"}
         />
       </div>
