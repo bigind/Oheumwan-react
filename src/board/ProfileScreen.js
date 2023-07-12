@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProfileBody, ProfileButtons } from './ProfileBody';
+import ProfileTab, { ProfileBody, ProfileButtons } from './ProfileBody';
 
 const ProfileScreen = () => {
   let circuls = [];
@@ -51,12 +51,14 @@ const ProfileScreen = () => {
           following="35"
           post="500"
         />
+        <div style={{paddingLeft: 20, paddingBottom: 10}}>안녕하세요, 한소희입니다.</div>
         <ProfileButtons
           id={0}
           name="Sohui Han"
           accountName="xeesoxee"
           profileImage={"img/sohee.jpg"}
         />
+        <ProfileTab />
       </div>
       <div>
       </div>

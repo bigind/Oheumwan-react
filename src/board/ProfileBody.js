@@ -1,5 +1,72 @@
 import React, {useState} from 'react';
-import { FiChevronDown, FiPlusSquare, FiMenu, FiColumns } from 'react-icons/fi';
+import { FiChevronDown } from 'react-icons/fi';
+import Card from './Card';
+
+const images = [
+  'img/so1.jpg',
+  'img/so2.jpg',
+  'img/so3.jpg',
+  'img/so4.jpg',
+  'img/so5.jpg',
+  'img/so6.jpg',
+]
+
+const ProfileTab = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const segmentClicked = (index) => {
+    setActiveIndex(index);
+  };
+
+  const renderSectionOne = () => {
+    return (
+      <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
+        {images.map((image, index) => (
+          <div
+            key={index}
+            style={{
+              width: '33.33%',
+              minHeigh: '33.33%',
+              paddingLeft: index % 3 !== 0 ? 2 : 0,
+              marginBottom: 2,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              objectFit: 'cover'
+            }}
+            >
+            <img style={{ objectFit: 'cover', width: '100%', height: '100%' }} src={image} alt={`Image ${index}`} />
+          </div>
+      ))};
+    </div>
+  );
+};
+
+  const renderSection = () => {
+    if (activeIndex === 0) {
+      return <div style={{ flexDirection: 'row', flexWrap: 'wrap' }}>{renderSectionOne()}</div>;
+    } else if (activeIndex === 1) {
+      return (
+        <div>
+          <Card src="1" likes="100" />
+          <Card src="2" likes="36" />
+          <Card src="3" likes="240" />
+        </div>
+      );
+    }
+  };
+
+  return (
+    <div>
+      <div>
+          {renderSection()}
+      </div>
+    </div>
+   
+  );
+};
+
+export default ProfileTab;
 
 export const ProfileBody = ({
   name,
@@ -45,6 +112,7 @@ export const ProfileBody = ({
           justifyContent: 'space-around',
           paddingTop: 20,
           paddingBottom: 20,
+          textAlign: 'center'
         }}
       >
         <div style={{ alignItems: 'center' }}>
@@ -56,22 +124,22 @@ export const ProfileBody = ({
               height: 80,
               borderRadius: '50%',
             }}
-            alt="Profile"
+          alt="Profile"
           /><br/>
           <span style={{ marginTop: 10, paddingTop: 5, fontWeight: 'bold' }}>
             {name}
           </span>
         </div>
         <div style={{ alignItems: 'center' }}>
-          <span style={{ fontWeight: 'bold', fontSize: 18 }}>{post}</span>
+          <span style={{ fontWeight: 'bold', fontSize: 18 }}>{post}</span><br/>
           <span>Posts</span>
         </div>
         <div style={{ alignItems: 'center' }}>
           <span style={{ fontWeight: 'bold', fontSize: 18 }}>{followers}</span><br/>
-          <span>Followers</span>
+            <span>Followers</span>
         </div>
         <div style={{ alignItems: 'center' }}>
-          <span style={{ fontWeight: 'bold', fontSize: 18 }}>{following}</span>
+          <span style={{ fontWeight: 'bold', fontSize: 18 }}>{following}</span><br/>
           <span>Following</span>
         </div>
       </div>
@@ -93,25 +161,24 @@ export const ProfileButtons = ({ id, name, accountName, profileImage }) => {
               width: '100%',
               flexDirection: 'row',
               alignItems: 'center',
-              justifyContent: 'space-evenly',
-              paddingVertical: 5,
+              justifyContent: 'center'
             }}
           >
             <button
               onClick={handleEditProfile}
               style={{
-                width: '95%',
+                width: '100%'
               }}
             >
               <div
                 style={{
                   width: '100%',
-                  height: 35,
+                  height: 30,
                   borderRadius: 5,
                   borderColor: '#DEDEDE',
                   borderWidth: 1,
                   justifyContent: 'center',
-                  alignItems: 'center',
+                  alignItems: 'center'
                 }}
               >
                 <span
@@ -120,6 +187,8 @@ export const ProfileButtons = ({ id, name, accountName, profileImage }) => {
                     fontSize: 14,
                     letterSpacing: 1,
                     opacity: 0.8,
+                    alignItems: 'center',
+                    width: '100%'
                   }}
                 >
                   Edit Profile
@@ -159,25 +228,10 @@ export const ProfileButtons = ({ id, name, accountName, profileImage }) => {
             </button>
             <div
               style={{
-                width: '42%',
-                height: 35,
-                borderWidth: 1,
-                borderColor: '#DEDEDE',
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: 5,
-              }}
-            >
-              <span>Message</span>
-            </div>
-            <div
-              style={{
                 width: '10%',
                 height: 35,
                 borderWidth: 1,
                 borderColor: '#DEDEDE',
-                justifyContent: 'center',
-                alignItems: 'center',
                 borderRadius: 5,
               }}
             >
@@ -188,3 +242,4 @@ export const ProfileButtons = ({ id, name, accountName, profileImage }) => {
       </>
     );
   };
+
