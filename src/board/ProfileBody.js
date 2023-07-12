@@ -21,30 +21,30 @@ const ProfileTab = () => {
   const renderSectionOne = () => {
     return (
       <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
-        {images.map((image, index) => (
-          <div
-            key={index}
-            style={{
-              width: '33.33%',
-              minHeigh: '33.33%',
-              paddingLeft: index % 3 !== 0 ? 2 : 0,
-              marginBottom: 2,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              objectFit: 'cover'
-            }}
-            >
-            <img style={{ objectFit: 'cover', width: '100%', height: '100%' }} src={image} alt={`Image ${index}`} />
-          </div>
-      ))};
+       {images.map((image, index) => (
+        <div
+        key={index}
+        style={{
+          width: '33.33%',
+          minheight: '33.33%',
+          paddingLeft: index % 3 !== 0 ? 2 : 0,
+          marginBottom: 2,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          objectFit: 'cover'
+        }}
+        >
+        <img style={{ objectFit: 'cover', width: '100%', height: '100%' }} src={image} alt={`Image ${index}`} />
+        </div>
+      ))}
     </div>
   );
 };
 
   const renderSection = () => {
     if (activeIndex === 0) {
-      return <div style={{ flexDirection: 'row', flexWrap: 'wrap' }}>{renderSectionOne()}</div>;
+      return <div style={{ flexDirection: 'row', flexWrap: 'wrap' }}>{renderSectionOne()}</div>
     } else if (activeIndex === 1) {
       return (
         <div>
