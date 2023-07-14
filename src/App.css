@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;500&display=swap');
+
 .App {
   text-align: center;
 }
+
 
 div {
   box-sizing : border-box;
@@ -19,3 +22,27 @@ div {
   text-align: left;
   display: none;
 }
+
+.blackBg {
+  width : 100%;
+  height : 100%;
+  position : fixed;
+  background : rgba(0,0,0,0.5);
+  z-index: 1;
+  padding: 30px;
+  visibility: visible;
+  opacity: 0;
+  transition: all 1s;
+}
+
+.whiteBg {
+  background: white;
+  border-radius: 5px;
+  z-index: 2;
+  padding: 30px;
+} 
+
+.show {
+  visibility: visible
+}
+

@@ -1,8 +1,9 @@
 import './App.css';
 import {BrowserRouter, Routes, Route } from "react-router-dom";
 import ProfileScreen from './board/ProfileScreen';
-import Board from './board/Board';
 import Community from './board/Community';
+import Home from './board/Home';
+
 
 function App() {
   
@@ -10,7 +11,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-         <Route path="/" element={<Board/>}></Route>
+         <Route path="/" element={<Home/>}></Route>
          <Route path="/profile" element={<ProfileScreen/>}></Route>
          <Route path="/community" element={<Community/>}></Route>
         </Routes>
