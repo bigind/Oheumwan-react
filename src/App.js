@@ -6,7 +6,6 @@ import Home from './board/Home';
 
 
 function App() {
-  
   return (
     <div>
       <BrowserRouter>
