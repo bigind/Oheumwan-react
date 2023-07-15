@@ -77,30 +77,20 @@ export const ProfileBody = ({
   following,
 }) => {
   return (
-    <div style={{ alignItems: 'center' }}>
+    <div className='items-center'>
       {accountName && (
         <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
+          className='flex-1 flex-row items-center justify-center'
         >
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            <span style={{ fontSize: 18, fontWeight: 'bold' }}>
+          <div className='flex-1 flex-row items-center'>
+            <span className='text-lg font-bold'>
               {accountName}
             </span>
             <FiChevronDown
-              style={{
-                fontSize: 20,
-                color: 'black',
-                paddingLeft: 5,
-                opacity: 0.5,
-              }}
+              className='text-xl text-black pl-2 opacity-5'
             />
           </div>
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+          <div className='flex-1 flex-row items-center'>
           </div>
         </div>
       )}
@@ -114,32 +104,30 @@ export const ProfileBody = ({
           paddingBottom: 20,
           textAlign: 'center'
         }}
-      >
-        <div style={{ alignItems: 'center' }}>
+       >
+        <div className='items-center'>
           <img
             src={profileImage}
-            style={{
-              objectFit: 'cover',
-              width: 80,
-              height: 80,
-              borderRadius: '50%',
-            }}
+            className='object-cover w-20 h-20 rounded-full'
           alt="Profile"
           /><br/>
-          <span style={{ marginTop: 10, paddingTop: 5, fontWeight: 'bold' }}>
+          <span 
+          className='mt-2 pt-1 font-bold'>
             {name}
           </span>
         </div>
-        <div style={{ alignItems: 'center' }}>
-          <span style={{ fontWeight: 'bold', fontSize: 18 }}>{post}</span><br/>
+        <div className='items-center'>
+          <span className='font-bold text-lg' 
+          // style={{ fontWeight: 'bold', fontSize: 18 }}
+          >{post}</span><br/>
           <span>Posts</span>
         </div>
-        <div style={{ alignItems: 'center' }}>
-          <span style={{ fontWeight: 'bold', fontSize: 18 }}>{followers}</span><br/>
+        <div className='items-center'>
+          <span className='font-bold text-lg' >{followers}</span><br/>
             <span>Followers</span>
         </div>
-        <div style={{ alignItems: 'center' }}>
-          <span style={{ fontWeight: 'bold', fontSize: 18 }}>{following}</span><br/>
+        <div className='items-center'>
+          <span className='font-bold text-lg' >{following}</span><br/>
           <span>Following</span>
         </div>
       </div>
@@ -163,6 +151,7 @@ export const ProfileButtons = ({ id, name, accountName, profileImage }) => {
               alignItems: 'center',
               justifyContent: 'center'
             }}
+            className='w-full flex-row items-center justify-center'
           >
             <button
               onClick={handleEditProfile}
@@ -171,15 +160,7 @@ export const ProfileButtons = ({ id, name, accountName, profileImage }) => {
               }}
             >
               <div
-                style={{
-                  width: '100%',
-                  height: 30,
-                  borderRadius: 5,
-                  borderColor: '#DEDEDE',
-                  borderWidth: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center'
-                }}
+                className='w-full h-10' 
               >
                 <span
                   style={{

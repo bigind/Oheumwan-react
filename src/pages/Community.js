@@ -3,10 +3,15 @@ import React from 'react';
 import Card from '../components/Card';
 import { Component } from 'react';
 import Post from '../components/Post';
-
-
+import { useLocation } from 'react-router-dom';
 
 const Community = () => {
+  const location = useLocation();
+  const {title, content} = location.state || {};
+
+
+  console.log('Title:', title);
+  console.log('Content', content);
 
   const styles = {
     container: {
@@ -16,17 +21,19 @@ const Community = () => {
     
   };
   
-  const [modal, setModal] = useState(false);
+  // const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(true);
 
   return (
     <div style={styles.container}>
-      <div style={{textAlign: 'right'}}>
-        <div style={{width: '100%', textAlign: 'right'}}>
-        <button style={{width: '10%'}} onClick={() => {setModal(!modal)}}>✏️</button>
+      {modalOpen && <Post setModalOpen={setModalOpen} />} 
+      <div className='text-right'>
+        <div className='w-full text-right'>
+        <button className='w-1/12 pt-3' onClick={() => {setModalOpen(!modalOpen)}}>✏️</button>
         </div>
       </div>
-      <div style={{textAlign: 'left', padding: 5}}>
-        {modal === true ? <Post/> : (
+      <div className='text-left'>
+        {modalOpen === true ? <Post/> : (
         <div>
           <Card src='1' likes='2324' content='첫 게시물'/>
           <Card src='2' likes='26' content='두번째 게시물'/>

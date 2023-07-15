@@ -1,8 +1,22 @@
-const Post = () => {
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const Post = ({setModalOpen}) => {
+    const navigate = useNavigate();
+
+    const handlerSubmit=(e)=>{
+        e.preventDefault();
+        const title = e.target.elements.title.value;
+        const content = e.target.elements.content.value;
+        
+        navigate('/community', {state:{ title, content }});
+        setModalOpen(false);
+    }
+
     return (
     <div className="w-full h-screen">
-        <div className="text-xl text-neutral-500 font-bold mt-5 mb-2 text-center" >New Post</div>
-        <form className="mt-3" >
+        <div className="text-xl text-neutral-500 font-lighter mt-5 mb-2 text-center" >New Post</div>
+        <form className="mt-3" onSubmit={handlerSubmit}>
         <div className="flex flex-col md:flex-row mb-1 items-center">
             <label htmlFor="title" className="w-11/12 flex-1 mx-2 text-xs font-semibold text-gray-600 uppercase">
             Title

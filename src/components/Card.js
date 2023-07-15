@@ -10,9 +10,12 @@ const Card = ({src, likes, content}) => {
     return (
         <>
         <div>
-        <div>
-            <div style={{display: 'flex', flexDirection: 'row', marginLeft: 15, marginBottom: 10}}>
-            <img src={"img/sohee.jpg"} alt="xeesoxee" style={{ objectFit: 'cover', width: 50,height: 50, borderRadius: '50%'}} />
+        <div className='pt-2'>
+            <div 
+            className='flex flex-row ml-1 mb-2'
+            >
+            <img src={"img/sohee.jpg"} alt="xeesoxee" 
+            className='object-cover w-10 h-10 rounded-full'/>
                 <div style={{ display: 'flex', flexDirection: 'column', marginLeft: 10, justifyContent: 'center'}}>
                     <span style={{fontWeight: '500'}}>xeesoxee</span>
                     <span>2023년 7월 11일</span>
@@ -25,20 +28,18 @@ const Card = ({src, likes, content}) => {
         </div>
         <div style={{ height: 45 , marginLeft: 10}}>
             <button>
-                <FiHeart style={{ color: 'black' }} />
+                <FiHeart className='text-black' />
             </button>
-            <button>
-                <FiMessageCircle style={{ color: 'black' }} />
+            <button className='p-3'>
+                <FiMessageCircle className='text-black' />
             </button>
         </div>
-        <div style={{ height: 40, marginLeft: 10 }}>
+        <div className='font-black ml-2 h-7'>
             <span>좋아요 {likes}개</span>
         </div>
-        <div>
+        <div className='pb-5'>
         <span>
-        <span style={{ fontWeight: '900', marginLeft: 15 }}>xeesoxee </span>{content}
-        #인스타그램
-        </span>
+        <span className='font-black ml-2'>xeesoxee </span>{content}</span>
         </div>
         <hr/>
         </>
