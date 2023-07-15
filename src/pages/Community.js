@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import React from 'react';
 import Card from '../components/Card';
-import { Component } from 'react';
 import Post from '../components/Post';
 import { useLocation } from 'react-router-dom';
 
