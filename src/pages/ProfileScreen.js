@@ -1,5 +1,5 @@
 import React from 'react';
-import ProfileTab, { ProfileBody, ProfileButtons } from './ProfileBody';
+import ProfileTab, { ProfileBody, ProfileButtons } from '../components/ProfileBody';
 
 const ProfileScreen = () => {
   let circuls = [];

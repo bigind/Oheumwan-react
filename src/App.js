@@ -1,8 +1,8 @@
 import './App.css';
 import {BrowserRouter, Routes, Route } from "react-router-dom";
-import ProfileScreen from './board/ProfileScreen';
-import Community from './board/Community';
-import Home from './board/Home';
+import ProfileScreen from './pages/ProfileScreen';
+import Community from './pages/Community';
+import Home from './pages/Home';
 
 
 function App() {
