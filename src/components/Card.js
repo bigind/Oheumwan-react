@@ -7,6 +7,7 @@ const Card = ({src, likes, content}) => {
         '2': process.env.PUBLIC_URL + '/img/so2.jpg',
         '3': process.env.PUBLIC_URL + '/img/so3.jpg'
     }
+
     return (
         <>
         <div>

@@ -171,6 +171,7 @@ export const ProfileButtons = ({ id, name, accountName, profileImage }) => {
                     alignItems: 'center',
                     width: '100%'
                   }}
+                  className='font-bold text-lg items-center w-full '
                 >
                   Edit Profile
                 </span>
