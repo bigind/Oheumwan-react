@@ -1,12 +1,25 @@
 import React, { useState, useEffect } from "react";
 
 const GetImage = () => {
-  const [data, setData] = useState(null);
-
+  const [filename, setFilename] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  
   useEffect(() => {
     const userAgent = navigator.userAgent;
     const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
     const receiver = isIOS ? window : document;
+
+    const handleMessage = (event) => {
+      const { isError, filename } = JSON.parse(event.data);
+
+      if (filename) {
+        setFilename(filename);
+        setIsLoading(false);
+      }
+
+      setIsError(isError);
+    };
 
     // receiver를 사용하여 플랫폼에 따른 로직을 처리
     receiver.addEventListener('message', handleMessage);
@@ -17,10 +30,7 @@ const GetImage = () => {
     };
   }, []);
 
-  const handleMessage = (event) => {
-    const message = event.data;
-    setData(message)
-  };
+ 
 
   // React -> React Native
   // window.ReactNativeWebView.postMessage('Hello from WebView!');
@@ -40,8 +50,11 @@ const GetImage = () => {
 
   return (
     <>
-      <div> 전송 받은 이미지 경로 </div>
-      {data}
+      <div> 전송 받은 이미지 경로 
+        
+      </div>
+      {isLoading ? <h1>...Loading</h1> : <div><p>{filename}</p> <img src={"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Pink_lady_and_cross_section.jpg/1200px-Pink_lady_and_cross_section.jpg"} alt="zz" /></div>}
+
     </>
   );
 };
