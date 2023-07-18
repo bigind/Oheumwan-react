@@ -25,7 +25,7 @@ const Card = ({src, likes, content}) => {
         </div>
         </div>
         <div style={{textAlign: 'center'}}>
-            <img src={images[src]} alt="xeesoxee" style={{ minHeight:200 , width: '100%', flex: 1 }} />
+            <img src={src ? src : images['1']} alt="xeesoxee" style={{ minHeight:200 , width: '100%', flex: 1 }} />
         </div>
         <div style={{ height: 45 , marginLeft: 10}}>
             <button>

@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Post = ({setModalOpen}) => {
+const Post = ({setModalOpen, handlerImageUpload}) => {
     const navigate = useNavigate();
 
     const handlerSubmit=(e)=>{
@@ -16,7 +16,7 @@ const Post = ({setModalOpen}) => {
         setModalOpen(false);
       };
 
-    const [imgFile, setImgFile] = useState("");
+    const [imgFile, setImgFile] = useState(null);
     const imgRef = useRef();
 
     // 이미지 업로드 input의 onChange
@@ -27,7 +27,12 @@ const Post = ({setModalOpen}) => {
         reader.onloadend = () => {
             setImgFile(reader.result);
         };
+
+        handlerImageUpload(file);
     };
+
+    
+
 
     return (
     <div className="w-full h-screen">
@@ -41,13 +46,13 @@ const Post = ({setModalOpen}) => {
           ❌
         </button>
       </div>
-        <div className="text-xl text-neutral-500 font-lighter mt-5 mb-2 text-center" >New Post</div>
+        <div className="text-xl text-neutral-500 font-lighter mt-5 mb-2 text-center pb-5" >New Post</div>
         <form className="mt-3" onSubmit={handlerSubmit}>
         <div className="flex place-content-center">
-            <div className="text-center">
+            <div className="text-center grid place-items-center w-2/5">
                 {/* 업로드 된 imgfile 미리보기 */}
-            <img
-            src={imgFile ? imgFile :``}
+            <img className="text-center w-2/5"
+            src={imgFile ? imgFile :`img/default-img.png`}
             alt="이미지"
             />
             <label className="font-bold text-stone-400" htmlFor="profileImg">이미지 추가
@@ -60,8 +65,8 @@ const Post = ({setModalOpen}) => {
             />
             </label>
             </div>
-        <div className="flex flex-col md:flex-row mb-1 items-center">
-            <label htmlFor="title" className="w-11/12 flex-1 mx-2 text-xs font-semibold text-gray-600 uppercase">
+        <div className="flex flex-col items-center w-3/5">
+            <label htmlFor="title" className="w-11/12 flex-1 text-xs font-semibold text-gray-600 uppercase">
             Title
             <input className="w-full py-3 px-1 mt-1 text-gray-800 appearance-none border-2 border-gray-100 focus:text-gray-500 focus:outline-none focus:border-gray-200"
                 required
@@ -82,19 +87,7 @@ const Post = ({setModalOpen}) => {
                 name="content"
             />
             </label>
-            {/* <img
-            src={imgFile ? imgFile :``}
-            alt="이미지"
-            />
-            <label className="pt-3 font-bold text-stone-400" htmlFor="profileImg">이미지 추가
-            <input className="hidden"
-            type="file"
-            accept="image/*"
-            id="profileImg"
-            onChange={saveImgFile}
-            ref={imgRef}
-            />
-            </label> */}
+
         </div>
         </div>
         
