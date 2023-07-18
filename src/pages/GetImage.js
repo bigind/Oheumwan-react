@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const GetImage = () => {
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState('https://oheumwan-image-upload.s3.eu-central-1.amazonaws.com/');
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   
@@ -14,7 +15,7 @@ const GetImage = () => {
       const { isError, filename } = JSON.parse(event.data);
 
       if (filename) {
-        setImageUrl('https://oheumwan-image-upload.s3.eu-central-1.amazonaws.com/'+filename);
+        setImageUrl(imageUrl + filename);
         setIsLoading(false);
       }
 
@@ -48,13 +49,13 @@ const GetImage = () => {
 
   return (
     <>
-      <div> 전송 받은 이미지 경로 
-        
-      </div>
+      <div> 전송 받은 이미지 경로 </div>
+      <div> {imageUrl} </div>
+    
       {isLoading ? 
         <h1>...Loading</h1> 
       : 
-        <div><img src={imageUrl} alt='이미지 불러오지 못함' /></div>
+        <div><img src={imageUrl} /></div>
       }
 
 
