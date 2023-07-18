@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const GetImage = () => {
-  const [filename, setFilename] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   
@@ -14,7 +14,7 @@ const GetImage = () => {
       const { isError, filename } = JSON.parse(event.data);
 
       if (filename) {
-        setFilename(filename);
+        setImageUrl('https://oheumwan-image-upload.s3.eu-central-1.amazonaws.com/'+filename);
         setIsLoading(false);
       }
 
@@ -29,8 +29,6 @@ const GetImage = () => {
       receiver.removeEventListener('message', handleMessage);
     };
   }, []);
-
- 
 
   // React -> React Native
   // window.ReactNativeWebView.postMessage('Hello from WebView!');
@@ -53,7 +51,13 @@ const GetImage = () => {
       <div> 전송 받은 이미지 경로 
         
       </div>
-      {isLoading ? <h1>...Loading</h1> : <div><p>{filename}</p> <img src={"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Pink_lady_and_cross_section.jpg/1200px-Pink_lady_and_cross_section.jpg"} alt="zz" /></div>}
+      {isLoading ? 
+        <h1>...Loading</h1> 
+      : 
+        <div><img src={imageUrl} alt='이미지 불러오지 못함' /></div>
+      }
+
+
 
     </>
   );
