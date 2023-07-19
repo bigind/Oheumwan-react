@@ -26,9 +26,10 @@ const Post = ({setModalOpen, handlerImageUpload, handlePostSubmit}) => {
         reader.readAsDataURL(file);
         reader.onloadend = () => {
             setImgFile(reader.result);
+            handlerImageUpload(file);
         };
 
-        handlerImageUpload(file);
+        
     };
 
 
