@@ -1,15 +1,15 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Post = ({setModalOpen, handlerImageUpload}) => {
+const Post = ({setModalOpen, handlerImageUpload, handlePostSubmit}) => {
     const navigate = useNavigate();
 
     const handlerSubmit=(e)=>{
         e.preventDefault();
-        const title = e.target.elements.title.value;
         const content = e.target.elements.content.value;
+        handlePostSubmit(content);
         
-        navigate('/community', {state:{ title, content }});
+        navigate('/community', {state:{ content }});
         setModalOpen(false);
     }
     const handleCancel = () => {
@@ -30,8 +30,6 @@ const Post = ({setModalOpen, handlerImageUpload}) => {
 
         handlerImageUpload(file);
     };
-
-    
 
 
     return (
@@ -66,16 +64,6 @@ const Post = ({setModalOpen, handlerImageUpload}) => {
             </label>
             </div>
         <div className="flex flex-col items-center w-3/5">
-            <label htmlFor="title" className="w-11/12 flex-1 text-xs font-semibold text-gray-600 uppercase">
-            Title
-            <input className="w-full py-3 px-1 mt-1 text-gray-800 appearance-none border-2 border-gray-100 focus:text-gray-500 focus:outline-none focus:border-gray-200"
-                required
-                placeholder="제목을 입력해주세요"
-                type="text"
-                id="title"
-                name="title"
-            />
-            </label>
             <label htmlFor="content" className="w-11/12 flex-1 mx-2 text-xs font-semibold text-gray-600 uppercase">
             Content
             <textarea
