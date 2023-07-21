@@ -1,22 +1,21 @@
 import React, {Component, useState} from 'react';
 import { FiHeart, FiMessageCircle, FiMoreHorizontal } from 'react-icons/fi';
-// import Popup from './Popup';
+import Popup from './Popup';
 
 const Card = ({src, likes, content}) => {
+
     const images = {
         '1': process.env.PUBLIC_URL + '/img/so1.jpg',
         '2': process.env.PUBLIC_URL + '/img/so2.jpg',
         '3': process.env.PUBLIC_URL + '/img/so3.jpg'
     }
 
-    // const [ispopup, setIsPopup] = useState(false);
-    
-    // const handlePopup = () => {
-    //     return(
-    //         setIsPopup(!ispopup)
-    //     );
-    // }
+    // const [popupOpen, setPopupOpen] = useState(false);
+    const [popupOpen, setPopupOpen] = useState(false);
 
+    const showPopup = () => {
+        setPopupOpen(true);
+    }
 
 
     return (
@@ -35,9 +34,13 @@ const Card = ({src, likes, content}) => {
                     <span>2023년 7월 11일</span>
                 </div>
                 </div>
-                <FiMoreHorizontal className='mr-3 mt-3 cursor-pointer'/>
+                {!popupOpen && (
+                    <FiMoreHorizontal className='mr-3 mt-3 cursor-pointer' onClick={showPopup}/>)}
             </div>
-            {/* {ispopup ? <Popup handlePopup={handlePopup} /> : "" } */}
+            {popupOpen && (
+        <Popup setPopupOpen={setPopupOpen} 
+        />
+        )} 
         </div>
         </div>
         <div style={{textAlign: 'center'}}>

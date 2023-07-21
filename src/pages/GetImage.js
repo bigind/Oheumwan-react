@@ -31,22 +31,6 @@ const GetImage = () => {
     };
   }, []);
 
-  // React -> React Native
-  // window.ReactNativeWebView.postMessage('Hello from WebView!');
-  //
-  // React Native -> React (Android)
-  // document.addEventListener('message', (event) => {
-  //     const receivedData = event.data;
-  //     // alert('Received data: ' + receivedData);
-  //     setData(receivedData)
-  // });
-  //
-  // React Native -> React (ios)
-  // window.addEventListener('message', (event) => {
-  //     const data = event.data;
-  //     alert('Received data:', data);
-  // });
-
   return (
     <>
       <div> 전송 받은 이미지 경로 </div>
