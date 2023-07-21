@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
-import { FiHeart, FiMessageCircle, FiSend } from 'react-icons/fi';
+import React, {Component, useState} from 'react';
+import { FiHeart, FiMessageCircle, FiMoreHorizontal } from 'react-icons/fi';
+// import Popup from './Popup';
 
 const Card = ({src, likes, content}) => {
     const images = {
@@ -8,20 +9,35 @@ const Card = ({src, likes, content}) => {
         '3': process.env.PUBLIC_URL + '/img/so3.jpg'
     }
 
+    // const [ispopup, setIsPopup] = useState(false);
+    
+    // const handlePopup = () => {
+    //     return(
+    //         setIsPopup(!ispopup)
+    //     );
+    // }
+
+
+
     return (
         <>
         <div>
         <div className='pt-2'>
+            <div className='flex justify-between'>
             <div 
             className='flex flex-row ml-1 mb-2'
             >
             <img src={"img/sohee.jpg"} alt="xeesoxee" 
             className='object-cover w-10 h-10 rounded-full'/>
+            
                 <div style={{ display: 'flex', flexDirection: 'column', marginLeft: 10, justifyContent: 'center'}}>
                     <span style={{fontWeight: '500'}}>xeesoxee</span>
                     <span>2023년 7월 11일</span>
                 </div>
+                </div>
+                <FiMoreHorizontal className='mr-3 mt-3 cursor-pointer'/>
             </div>
+            {/* {ispopup ? <Popup handlePopup={handlePopup} /> : "" } */}
         </div>
         </div>
         <div style={{textAlign: 'center'}}>

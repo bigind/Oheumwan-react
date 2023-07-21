@@ -1,6 +1,9 @@
-import React, {useState} from 'react';
-import { FiChevronDown } from 'react-icons/fi';
+import React, {useState, useCallback} from 'react';
+import { FiSettings } from 'react-icons/fi';
+import { FaBars } from "react-icons/fa";
 import Card from './Card';
+import Sidebar from './Sidebar';
+
 
 const images = [
   'img/so1.jpg',
@@ -11,12 +14,9 @@ const images = [
   'img/so6.jpg',
 ]
 
+
 const ProfileTab = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-
-  const segmentClicked = (index) => {
-    setActiveIndex(index);
-  };
 
   const renderSectionOne = () => {
     return (
@@ -76,23 +76,36 @@ export const ProfileBody = ({
   followers,
   following,
 }) => {
+
+  // const [modalset, setModalset] = useState();
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleSide = () => {
+    setIsOpen(true);
+  };
+
   return (
+    
     <div className='items-center'>
-      {accountName && (
-        <div
-          className='flex-1 flex-row items-center justify-center'
-        >
-          <div className='flex-1 flex-row items-center'>
+      {accountName 
+      && (
+        <div className='flex-1 items-center '>
+          <div className='items-right flex flex-row justify-between'>
             <span className='text-lg font-bold'>
               {accountName}
             </span>
-            <FiChevronDown
-              className='text-xl text-black pl-2 opacity-5'
-            />
-          </div>
-          <div className='flex-1 flex-row items-center'>
+            <span className='text-xl text-black text-right'>
+              {/* <FiSettings className='cursor-pointer'/> */}
+              {!isOpen && (
+                <FiSettings className='cursor-pointer' onClick={toggleSide}/>
+                )}
+            </span>
           </div>
         </div>
+      )
+      }
+      {isOpen && (
+        <Sidebar isOpen={isOpen}
+        />
       )}
       <div
         style={{
@@ -217,7 +230,7 @@ export const ProfileButtons = ({ id, name, accountName, profileImage }) => {
                 borderRadius: 5,
               }}
             >
-              <span style={{ fontSize: 20, color: 'black' }}>▼</span>
+            
             </div>
           </div>
         )}

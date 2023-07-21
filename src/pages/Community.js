@@ -21,8 +21,9 @@ const Community = () => {
       fileName = uploadedImages[uploadedImages.length - 1].name;
     }
   useEffect(() => {
-    console.log(initialContent);
-    console.log(fileName);
+    // console.log(initialContent);
+    // console.log(fileName);
+
     axios.post(apiEndpoint, {
               username: "user1",
               content: initialContent,
@@ -30,7 +31,7 @@ const Community = () => {
           }).then(res => {
               console.log(res)
           }).catch(err => console.log(err))
-}, [uploadedImages, initialContent]);
+    }, [uploadedImages, initialContent]);
 
 
   const styles = {
