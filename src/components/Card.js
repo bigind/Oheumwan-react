@@ -17,6 +17,8 @@ const Card = ({src, likes, content}) => {
         setPopupOpen(true);
     }
 
+    const [editmodalOn, setEditModalOn] = useState(false);
+
 
     return (
         <>

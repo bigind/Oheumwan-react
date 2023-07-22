@@ -1,4 +1,14 @@
-const Popup = ({ setPopupOpen}) => {
+import React,{useState} from "react";
+import Edit from "./Edit";
+
+const Popup = ({ setPopupOpen }) => {
+
+    const [editmodalOn, setEditModalOn] = useState(false);
+
+    const showEdit = () => {
+        setEditModalOn(true);
+    }
+
     // 모달 끄기 
     const closePopup = () => {
         setPopupOpen(false);
@@ -10,10 +20,16 @@ const Popup = ({ setPopupOpen}) => {
                 X
             </button>
             <div>
-            <p className="pb-2">수정하기</p>
+            {/* <p className="pb-2">수정하기</p> */}
+            {!editmodalOn && (
+                <p className="pb-2" onClick={showEdit}>수정하기</p>)}
             <hr/>
             <p className="pt-2">삭제하기</p>
             </div>
+            {editmodalOn && (
+            <Edit setEditModalOn={setEditModalOn} 
+            />
+            )}
         </div>
     );
 }

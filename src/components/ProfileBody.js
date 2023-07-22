@@ -17,7 +17,7 @@ const images = [
 
 const ProfileTab = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-
+  // 프로필 아래 사진들이 쌓이는 부분
   const renderSectionOne = () => {
     return (
       <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
@@ -77,7 +77,6 @@ export const ProfileBody = ({
   following,
 }) => {
 
-  // const [modalset, setModalset] = useState();
   const [isOpen, setIsOpen] = useState(false);
   const toggleSide = () => {
     setIsOpen(true);
@@ -93,8 +92,8 @@ export const ProfileBody = ({
             <span className='text-lg font-bold'>
               {accountName}
             </span>
+            {/* 설정(setting) 버튼 */}
             <span className='text-xl text-black text-right'>
-              {/* <FiSettings className='cursor-pointer'/> */}
               {!isOpen && (
                 <FiSettings className='cursor-pointer' onClick={toggleSide}/>
                 )}
@@ -103,6 +102,7 @@ export const ProfileBody = ({
         </div>
       )
       }
+      {/* 설정버튼 클릭시 열기 */}
       {isOpen && (
         <Sidebar isOpen={isOpen}
         />
@@ -131,7 +131,6 @@ export const ProfileBody = ({
         </div>
         <div className='items-center'>
           <span className='font-bold text-lg' 
-          // style={{ fontWeight: 'bold', fontSize: 18 }}
           >{post}</span><br/>
           <span>Posts</span>
         </div>

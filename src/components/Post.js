@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Post = ({setModalOpen, handlerImageUpload, handlePostSubmit}) => {
+const Post = ({setModalOpen, handleImageUpload, handlePostSubmit}) => {
     const navigate = useNavigate();
 
     const handlerSubmit=(e)=>{
@@ -26,7 +26,7 @@ const Post = ({setModalOpen, handlerImageUpload, handlePostSubmit}) => {
         reader.readAsDataURL(file);
         reader.onloadend = () => {
             setImgFile(reader.result);
-            handlerImageUpload(file);
+            handleImageUpload(file);
         };
 
         
