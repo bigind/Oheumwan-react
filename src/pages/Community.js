@@ -7,6 +7,7 @@ import axios from 'axios';
 
 const apiEndpoint = `https://xs21gvtq40.execute-api.eu-central-1.amazonaws.com/oheumwan/community`;
 
+const username = 'user1'
 
 const Community = () => {
   const location = useLocation();
@@ -21,49 +22,39 @@ const Community = () => {
   const NextId = useRef();
   const [isLoading, setIsLoading] = useState(true); // 데이터 불러오기 전에 렌더링되어서 로딩변수 추가 
   let fileName = '';
-    if (uploadedImages.length > 0) {
-      fileName = uploadedImages[uploadedImages.length - 1].name;
-    }
+  if (uploadedImages.length > 0) {
+    fileName = uploadedImages[uploadedImages.length - 1].name;
+  }
 
-  
 
-  useEffect(() => {
-    //DB에서 데이터 가져오기
-  const fetchDataFromDatabase = () => {
-    axios.get(apiEndpoint, {
-      params: {
-        username: "user1",
-      }
-    }).then(res => {
-      const data = res.data; // 받아온 데이터
-      setPost(data); // 받아온 데이터를 post 상태에 저장
-      setIsLoading(false);
-    }).catch(err => console.log(err));
-    };
-    fetchDataFromDatabase(); // 컴포넌트가 처음 렌더링될 때 데이터를 불러옴
-  }, []);
-
- 
 
   useEffect(() => {
-  
+    axios.get(`${apiEndpoint}?username=${username}`)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => console.log(err))
+  }, [])
 
+
+
+  useEffect(() => {
     axios.post(apiEndpoint, {
-              username: "user1",
-              content: initialContent,
-              image_path: fileName
-          }).then(res => {
-            
-            const jsonData = JSON.parse(res.config.data);
-            // console.log(res);
-            // console.log(jsonData);
-            NextId.current = jsonData.length > 0 ? Math.max(...jsonData.map(post=> post.post_id.current)) + 1 : 1;
-            console.log(NextId);
-            
-          }).catch(err => console.log(err))
-    }, [uploadedImages, initialContent]);
+      username: "user1",
+      content: initialContent,
+      image_path: fileName
+    }).then(res => {
 
-  
+      const jsonData = JSON.parse(res.config.data);
+      // console.log(res);
+      // console.log(jsonData);
+      NextId.current = jsonData.length > 0 ? Math.max(...jsonData.map(post => post.post_id.current)) + 1 : 1;
+      console.log(NextId);
+
+    }).catch(err => console.log(err))
+  }, [uploadedImages, initialContent]);
+
+
 
   const handleImageUpload = (file, fileName) => {
     setUploadedImages((prevImages) => [...prevImages, file]);
@@ -74,24 +65,19 @@ const Community = () => {
     setContents((prevContents) => [...prevContents, content]);
   };
 
-  const handlePostSubmit = ( content) => {
+  const handlePostSubmit = (content) => {
     setContents((prevContents) => [...prevContents, content]);
 
     setModalOpen(false);
   };
 
 
-
-  
-
-  
-
   return (
     <div className='bg-white items-center flex-1'>
       <div className='w-full'>
         <div className='text-right'>
           {!modalOpen && (
-          <button className='w-1/12 pt-3' onClick={() => setModalOpen(true)}>✏️</button>)}
+            <button className='w-1/12 pt-3' onClick={() => setModalOpen(true)}>✏️</button>)}
         </div>
       </div>
       {modalOpen && (
@@ -107,9 +93,9 @@ const Community = () => {
         {!modalOpen && (
           <div>
             {uploadedImages.map((image, index) => (
-        <Card key={index} src={URL.createObjectURL(image)} likes='0' content={contents[index+1]}  />
-      ))}
-            
+              <Card key={index} src={URL.createObjectURL(image)} likes='0' content={contents[index + 1]} />
+            ))}
+
           </div>
         )}
       </div>
