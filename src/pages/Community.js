@@ -26,12 +26,12 @@ const Community = () => {
     fileName = uploadedImages[uploadedImages.length - 1].name;
   }
 
-
-
   useEffect(() => {
     axios.get(`${apiEndpoint}?username=${username}`)
       .then(res => {
-        console.log(res)
+        const fetchedData = JSON.parse(res.data.body);
+        console.log(fetchedData);
+        setPost(fetchedData);
       })
       .catch(err => console.log(err))
   }, [])
@@ -47,9 +47,9 @@ const Community = () => {
 
       const jsonData = JSON.parse(res.config.data);
       // console.log(res);
-      // console.log(jsonData);
-      NextId.current = jsonData.length > 0 ? Math.max(...jsonData.map(post => post.post_id.current)) + 1 : 1;
-      console.log(NextId);
+      //  console.log(jsonData);
+      // NextId.current = jsonData.length > 0 ? Math.max(...jsonData.map(post => post.post_id.current)) + 1 : 1;
+      // console.log(NextId);
 
     }).catch(err => console.log(err))
   }, [uploadedImages, initialContent]);
@@ -92,8 +92,13 @@ const Community = () => {
       <div className='text-left'>
         {!modalOpen && (
           <div>
-            {uploadedImages.map((image, index) => (
-              <Card key={index} src={URL.createObjectURL(image)} likes='0' content={contents[index + 1]} />
+            {post.map((item) => ( //get으로 가져온 D 출력
+              <Card
+                key={item.post_id}
+                src={item.image_path} 
+                likes="0"
+                content={item.content} 
+              />
             ))}
 
           </div>
