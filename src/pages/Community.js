@@ -43,18 +43,10 @@ const Community = () => {
     fetchDataFromDatabase(); // 컴포넌트가 처음 렌더링될 때 데이터를 불러옴
   }, []);
 
-  // useEffect(() => {
-  //   // selected 상태가 변경될 때마다 데이터를 다시 불러옴
-  //   fetchDataFromDatabase();
-  // }, [selected]);
+ 
 
   useEffect(() => {
-    // const styles = {
-    //   container: {
-    //     flex: 1,
-    //     backgroundColor: 'white',
-    //   },
-    // };
+  
 
     axios.post(apiEndpoint, {
               username: "user1",
@@ -71,48 +63,6 @@ const Community = () => {
           }).catch(err => console.log(err))
     }, [uploadedImages, initialContent]);
 
-  const handlerSave = (data) => {
-    if (data.id) {
-        setPost(
-            post.map(row => data.id === row.id ? {
-                id: data.id,
-                name: data.name, 
-                email: data.email,
-                phone_number: data.phone_number,
-                website_address: data.website_address,
-            } : row));
-      
-    } else {
-          
-        setPost( post => post.concat(
-            {
-                id: NextId.current,
-                name: data.name,
-                email: data.email,
-                phone_number: data.phone_number,
-                website_address: data.website_address
-            }
-        ));
-  
-         
-        axios.post(apiEndpoint, {
-              id: NextId.current,
-              name: data.name,
-              email: data.email,
-              phone_number: data.phone_number,
-              website_address: data.website_address
-        })
-        .then(res => {
-            console.log(res.data);
-        })
-        .catch(err => {
-            console.log(err);
-        });
-
-  
-        NextId.current += 1;
-      }
-  }
   
 
   const handleImageUpload = (file, fileName) => {
@@ -130,49 +80,10 @@ const Community = () => {
     setModalOpen(false);
   };
 
-  const handleremove = (username) => {
-    setPost((post) => post.filter((item) => item.config.username !== username));
-      
-         axios
-          .delete(`${apiEndpoint}/${username}`)
-          .then((res) => {
-            console.log(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-  }
 
-  const handleEdit = (item) => {
-    setEditModalOn(true);
-    console.log(item);
-    const selectedData = {
-        username: "user1",
-        content: initialContent,
-        image_path: fileName,
-        post_id: 1
-    };
-    setSelected(selectedData);
-};
 
-  const handleEditSubmit = (item) => {
-    // handleSave(item);
-    axios
-    .put(`${apiEndpoint}`, {
-      id: item.id,
-      name: item.name,
-      email: item.email,
-      phone_number: item.phone_number,
-      website_address: item.website_address,
-    })
-    .then((res) => {
-      console.log(res.data);
-      setEditModalOn(false); // 모달을 닫는다
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+  
+
   
 
   return (
