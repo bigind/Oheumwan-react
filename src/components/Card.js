@@ -1,6 +1,10 @@
 import React, {Component, useState} from 'react';
 import { FiHeart, FiMessageCircle, FiMoreHorizontal } from 'react-icons/fi';
 import Popup from './Popup';
+import Edit from './Edit';
+import axios from 'axios';
+
+const apiEndpoint = `https://xs21gvtq40.execute-api.eu-central-1.amazonaws.com/oheumwan/community`;
 
 const Card = ({src, likes, content}) => {
 
@@ -16,6 +20,38 @@ const Card = ({src, likes, content}) => {
     const showPopup = () => {
         setPopupOpen(true);
     }
+    //
+    const [edited, setEdited] = useState();
+    const [isEditOpen, setEditOpen] = useState(false);
+
+    const handleEditOpen = () => {
+        setEditOpen(true);
+    };
+
+    const handleEditCancel = () => {
+      setEditOpen(false);
+    };
+
+    const handleEditSubmit = (item) => {
+        console.log(item);
+        // handlerSave(item);
+        axios
+          .put(`${apiEndpoint}`, {
+            id: item.id,
+            name: item.name,
+            email: item.email,
+            phone_number: item.phone_number,
+            website_address: item.website_address,
+          })
+          .then((res) => {
+            console.log(res.data);
+            setEditOpen(false); // 모달을 닫는다
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
+    //
 
     return (
         <>
@@ -34,12 +70,21 @@ const Card = ({src, likes, content}) => {
                 </div>
                 </div>
                 {!popupOpen && (
-                    <FiMoreHorizontal className='mr-3 mt-3 cursor-pointer' onClick={showPopup}/>)}
+                    // <FiMoreHorizontal className='mr-3 mt-3 cursor-pointer' onClick={showPopup}/>
+                    <button onClick={handleEditOpen}>Edit</button>
+                    )}
             </div>
             {popupOpen && (
-        <Popup setPopupOpen={setPopupOpen} 
-        />
+                    <Popup setPopupOpen={setPopupOpen} />
+               
         )} 
+        {isEditOpen && (
+        <div className="fixed left-0 top-0 w-screen h-screen flex justify-center items-center bg-black bg-opacity-70">
+          <div className="bg-white rounded shadow-lg w-10/12 md:w-1/3">
+            <Edit selectedData={edited} handlerCancel={handleEditCancel} handlerEditSubmit={handleEditSubmit} />
+          </div>
+        </div>
+      )}
         </div>
         </div>
         <div style={{textAlign: 'center'}}>
