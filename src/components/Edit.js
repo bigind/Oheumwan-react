@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 
-const Edit = ({selectedData, handlerCancel, handlerEditSubmit, handleremove}) => {
+const Edit = ({selectedData, handlerCancel, handlerEditSubmit, handlerRemove}) => {
+
     const [edited, setEdited] = useState(selectedData);
  
-
     const onCancel = () => {
         handlerCancel();
     }
@@ -22,8 +22,8 @@ const Edit = ({selectedData, handlerCancel, handlerEditSubmit, handleremove}) =>
     }
 
     const onDelete = () => {
-        handleremove(edited);
-        onCancel();
+        handlerRemove(selectedData.post_id);
+         onCancel();
     }
 
     return(

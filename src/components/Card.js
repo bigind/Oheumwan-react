@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {Component, useState, useEffect} from 'react';
 import { FiHeart, FiMessageCircle, FiMoreHorizontal } from 'react-icons/fi';
 import Popup from './Popup';
 import Edit from './Edit';
@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const apiEndpoint = `https://xs21gvtq40.execute-api.eu-central-1.amazonaws.com/oheumwan/community`;
 
-const Card = ({src, likes, content}) => {
+const Card = ({src, likes, content, edited, setEdited, handlerRemove}) => {
 
     const images = {
         '1': process.env.PUBLIC_URL + '/img/so1.jpg',
@@ -20,8 +20,6 @@ const Card = ({src, likes, content}) => {
     const showPopup = () => {
         setPopupOpen(true);
     }
-    //
-    const [edited, setEdited] = useState();
     const [isEditOpen, setEditOpen] = useState(false);
 
     const handleEditOpen = () => {
@@ -45,13 +43,14 @@ const Card = ({src, likes, content}) => {
           })
           .then((res) => {
             console.log(res.data);
-            setEditOpen(false); // 모달을 닫는다
+            setEditOpen(false); // 모달 닫기
           })
           .catch((err) => {
             console.log(err);
           });
       };
-    //
+
+    
 
     return (
         <>
@@ -81,7 +80,7 @@ const Card = ({src, likes, content}) => {
         {isEditOpen && (
         <div className="fixed left-0 top-0 w-screen h-screen flex justify-center items-center bg-black bg-opacity-70">
           <div className="bg-white rounded shadow-lg w-10/12 md:w-1/3">
-            <Edit selectedData={edited} handlerCancel={handleEditCancel} handlerEditSubmit={handleEditSubmit} />
+            <Edit selectedData={edited} handlerCancel={handleEditCancel} handlerEditSubmit={handleEditSubmit} handlerRemove={handlerRemove} />
           </div>
         </div>
       )}

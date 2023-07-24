@@ -19,8 +19,8 @@ const Community = () => {
   const [post, setPost] = useState([]); // 전체 글
   const [selected, setSelected] = useState(''); // 선택된 글
   const [editmodalOn, setEditModalOn] = useState(false);
+  const [edited, setEdited] = useState([]);
   const NextId = useRef();
-  const [isLoading, setIsLoading] = useState(true); // 데이터 불러오기 전에 렌더링되어서 로딩변수 추가 
   let fileName = '';
   if (uploadedImages.length > 0) {
     fileName = uploadedImages[uploadedImages.length - 1].name;
@@ -46,10 +46,6 @@ const Community = () => {
     }).then(res => {
 
       const jsonData = JSON.parse(res.config.data);
-      // console.log(res);
-      //  console.log(jsonData);
-      // NextId.current = jsonData.length > 0 ? Math.max(...jsonData.map(post => post.post_id.current)) + 1 : 1;
-      // console.log(NextId);
 
     }).catch(err => console.log(err))
   }, [uploadedImages, initialContent]);
@@ -71,7 +67,27 @@ const Community = () => {
     setModalOpen(false);
   };
 
-
+  const handlerRemove = (post_id) => {
+    console.log("Received post_id:", post_id);
+    axios
+      .delete(apiEndpoint, {
+        data: {
+          post_id: post_id,
+          author_id: "1",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+  
+        if (res.status === 200) {
+          setPost((prevPost) => prevPost.filter((item) => item.post_id !== post_id));
+        } else {
+          console.log("삭제 실패");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+  
   return (
     <div className='bg-white items-center flex-1'>
       <div className='w-full'>
@@ -97,7 +113,10 @@ const Community = () => {
                 key={item.post_id}
                 src={item.image_path} 
                 likes="0"
-                content={item.content} 
+                content={item.content}
+                edited={edited}
+                setEdited={setEdited}
+                handlerRemove={() => handlerRemove(item.post_id)} // post_id를 prop 전달
               />
             ))}
 
