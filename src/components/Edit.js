@@ -4,7 +4,7 @@ const Edit = ({selectedData, handlerCancel, handlerEditSubmit, handlerRemove}) =
 
 
     const [edited, setEdited] = useState(selectedData.content);
- 
+    
     const onCancel = () => {
         handlerCancel();
     }
@@ -16,14 +16,15 @@ const Edit = ({selectedData, handlerCancel, handlerEditSubmit, handlerRemove}) =
     const onSubmitEdit = (e) => {
         e.preventDefault();
         handlerEditSubmit(edited);
+        console.log(edited);
         // handlerEditSubmit({ ...selectedData, content: edited });
-        
     }
 
     const onDelete = () => {
         handlerRemove(selectedData.post_id);
          onCancel();
     }
+   
 
     return(
         <div

@@ -18,7 +18,7 @@ const Card = ({src, likes, content,handlerRemove}) => {
     // const [popupOpen, setPopupOpen] = useState(false);
     const [popupOpen, setPopupOpen] = useState(false);
     const [edited, setEdited] = useState({});
-
+    const [editedContent, setEditedContent] = useState(content);
     // useEffect(() => {
     //   setEdited({ content });
     // }, []);
@@ -30,6 +30,7 @@ const Card = ({src, likes, content,handlerRemove}) => {
     const showPopup = () => {
         setPopupOpen(true);
     }
+    
     const [isEditOpen, setEditOpen] = useState(false);
 
     const handleEditOpen = () => {
@@ -45,13 +46,14 @@ const Card = ({src, likes, content,handlerRemove}) => {
         console.log(edited);
         axios
           .put(apiEndpoint, {
-            post_id: edited.post_id,
+            post_id: '345',
             author_id: '1',
-            new_content: edited.content,
-            new_image_path: edited.image_path
+            new_content: edited,
+            new_image_path: 'image_path'
           })
           .then((res) => {
             console.log(res.data);
+            setEditedContent(edited);
             setEditOpen(false); // 모달 닫기
           })
           .catch((err) => {
@@ -117,7 +119,7 @@ const Card = ({src, likes, content,handlerRemove}) => {
         </div>
         <div className='pb-5'>
         <span>
-        <span className='font-black ml-2'>xeesoxee </span>{content}</span>
+        <span className='font-black ml-2'>xeesoxee </span>{editedContent}</span>
         </div>
         <hr/>
         </>
