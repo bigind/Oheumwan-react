@@ -36,22 +36,6 @@ const Community = () => {
       .catch(err => console.log(err))
   }, [])
 
-
-
-  useEffect(() => {
-    axios.post(apiEndpoint, {
-      username: "user1",
-      content: initialContent,
-      image_path: fileName
-    }).then(res => {
-
-      const jsonData = JSON.parse(res.config.data);
-
-    }).catch(err => console.log(err))
-  }, [uploadedImages, initialContent]);
-
-
-
   const handleImageUpload = (file, fileName) => {
     setUploadedImages((prevImages) => [...prevImages, file]);
     setContents((prevContents) => [...prevContents, fileName]);
@@ -61,8 +45,29 @@ const Community = () => {
     setContents((prevContents) => [...prevContents, content]);
   };
 
+  // const handlePostSubmit = (content) => {
+  //   setContents((prevContents) => [...prevContents, content]);
+
+  //   setModalOpen(false);
+  // };
   const handlePostSubmit = (content) => {
-    setContents((prevContents) => [...prevContents, content]);
+    axios
+      .post(apiEndpoint, {
+        username: username,
+        content: content,
+        image_path: fileName,
+      })
+      .then((res) => {
+        // 새 글이 성공적으로 등록되면, 업데이트된 글 데이터를 다시 서버에서 가져옴
+        axios
+          .get(`${apiEndpoint}?username=${username}`)
+          .then((res) => {
+            const fetchedData = JSON.parse(res.data.body);
+            setPost(fetchedData);
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
 
     setModalOpen(false);
   };
