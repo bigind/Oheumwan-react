@@ -17,9 +17,8 @@ const Community = () => {
   const [uploadedImages, setUploadedImages] = useState([]);
   const [contents, setContents] = useState([]);
   const [post, setPost] = useState([]); // 전체 글
-  const [selected, setSelected] = useState(''); // 선택된 글
-  const [editmodalOn, setEditModalOn] = useState(false);
-  const [edited, setEdited] = useState([]);
+  const [selected, setSelected] = useState(null); // 선택된 글
+  const [editmodalOn, setEditModalOn] = useState(false); //edit modal
   const NextId = useRef();
   let fileName = '';
   if (uploadedImages.length > 0) {
@@ -45,11 +44,7 @@ const Community = () => {
     setContents((prevContents) => [...prevContents, content]);
   };
 
-  // const handlePostSubmit = (content) => {
-  //   setContents((prevContents) => [...prevContents, content]);
-
-  //   setModalOpen(false);
-  // };
+ 
   const handlePostSubmit = (content) => {
     axios
       .post(apiEndpoint, {
@@ -58,7 +53,6 @@ const Community = () => {
         image_path: fileName,
       })
       .then((res) => {
-        // 새 글이 성공적으로 등록되면, 업데이트된 글 데이터를 다시 서버에서 가져옴
         axios
           .get(`${apiEndpoint}?username=${username}`)
           .then((res) => {
@@ -92,6 +86,15 @@ const Community = () => {
       })
       .catch((err) => console.log(err));
   };
+
+  const handlerEdit = (item) => {
+    setEditModalOn(true);
+    console.log(item);
+    setSelected(item);
+};
+
+
+
   
   return (
     <div className='bg-white items-center flex-1'>
@@ -119,9 +122,11 @@ const Community = () => {
                 src={item.image_path} 
                 likes="0"
                 content={item.content}
-                edited={edited}
-                setEdited={setEdited}
                 handlerRemove={() => handlerRemove(item.post_id)} // post_id를 prop 전달
+                // handlerEditSubmit={handlerEditSubmit}
+                // handlerEdit={handlerEdit}
+                handlerEdit={(item) => handlerEdit(item)}
+                selected={selected}
               />
             ))}
 
@@ -132,7 +137,4 @@ const Community = () => {
   );
 };
 
-export default Community;
-
-
-
+export default Community; 

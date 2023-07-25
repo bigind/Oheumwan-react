@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const apiEndpoint = `https://xs21gvtq40.execute-api.eu-central-1.amazonaws.com/oheumwan/community`;
 
-const Card = ({src, likes, content, edited, setEdited, handlerRemove}) => {
+const Card = ({src, likes, content,handlerRemove}) => {
 
     const images = {
         '1': process.env.PUBLIC_URL + '/img/so1.jpg',
@@ -14,8 +14,18 @@ const Card = ({src, likes, content, edited, setEdited, handlerRemove}) => {
         '3': process.env.PUBLIC_URL + '/img/so3.jpg'
     }
 
+
     // const [popupOpen, setPopupOpen] = useState(false);
     const [popupOpen, setPopupOpen] = useState(false);
+    const [edited, setEdited] = useState({});
+
+    // useEffect(() => {
+    //   setEdited({ content });
+    // }, []);
+
+    useEffect(() => {
+      setEdited({ content });
+    }, [content]);
 
     const showPopup = () => {
         setPopupOpen(true);
@@ -24,22 +34,21 @@ const Card = ({src, likes, content, edited, setEdited, handlerRemove}) => {
 
     const handleEditOpen = () => {
         setEditOpen(true);
+        setEdited({content});
     };
 
     const handleEditCancel = () => {
       setEditOpen(false);
     };
 
-    const handleEditSubmit = (item) => {
-        console.log(item);
-        // handlerSave(item);
+    const handlerEditSubmit = (edited) => {
+        console.log(edited);
         axios
-          .put(`${apiEndpoint}`, {
-            id: item.id,
-            name: item.name,
-            email: item.email,
-            phone_number: item.phone_number,
-            website_address: item.website_address,
+          .put(apiEndpoint, {
+            post_id: edited.post_id,
+            author_id: '1',
+            new_content: edited.content,
+            new_image_path: edited.image_path
           })
           .then((res) => {
             console.log(res.data);
@@ -49,6 +58,12 @@ const Card = ({src, likes, content, edited, setEdited, handlerRemove}) => {
             console.log(err);
           });
       };
+
+      const handlerEdit = (item) => {
+        setEditOpen(true);
+        handlerEdit(item); // prop으로 받은 'handlerEdit' 함수 호출     
+      };
+    
 
     
 
@@ -80,14 +95,14 @@ const Card = ({src, likes, content, edited, setEdited, handlerRemove}) => {
         {isEditOpen && (
         <div className="fixed left-0 top-0 w-screen h-screen flex justify-center items-center bg-black bg-opacity-70">
           <div className="bg-white rounded shadow-lg w-10/12 md:w-1/3">
-            <Edit selectedData={edited} handlerCancel={handleEditCancel} handlerEditSubmit={handleEditSubmit} handlerRemove={handlerRemove} />
+            <Edit selectedData={edited} handlerCancel={handleEditCancel} handlerEditSubmit={handlerEditSubmit} handlerRemove={handlerRemove} />
           </div>
         </div>
       )}
         </div>
         </div>
         <div style={{textAlign: 'center'}}>
-            <img src={src ? src : images['1']} alt="xeesoxee" style={{ minHeight:200 , width: '100%', flex: 1 }} />
+            <img src={src ? src : images['1']} alt="image" style={{ minHeight:200 , width: '100%', flex: 1 }} />
         </div>
         <div style={{ height: 45 , marginLeft: 10}}>
             <button>
@@ -110,7 +125,6 @@ const Card = ({src, likes, content, edited, setEdited, handlerRemove}) => {
     };
  
 export default Card;
-
 const styles = {
   container: {
     flex: 1,
