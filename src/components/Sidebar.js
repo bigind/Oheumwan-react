@@ -12,14 +12,17 @@ function Sidebar() {
   ];
 
   return (
-    <div className="sidebar">
+    <div className="text-right">
       {menus.map((menu, index) => {
         return (
+          <div>
           <Link to={menu.path} key={index}>
             <SidebarItem
               menu={menu}
             />
+            <hr className="p-1"/>
           </Link>
+          </div>
         );
       })}
     </div>
