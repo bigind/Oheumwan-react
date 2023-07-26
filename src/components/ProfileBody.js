@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { FiSettings } from 'react-icons/fi';
 import Card from './Card';
-import Sidebar from './Sidebar';
 import axios from 'axios';
 
 
@@ -92,11 +91,6 @@ export const ProfileBody = ({
   following,
 }) => {
 
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleSide = () => {
-    setIsOpen(true);
-  };
-
   return (
     
     <div className='items-center'>
@@ -109,19 +103,16 @@ export const ProfileBody = ({
             </span>
             {/* 설정(setting) 버튼 */}
             <span className='text-xl text-black text-right'>
-              {!isOpen && (
-                <FiSettings className='cursor-pointer' onClick={toggleSide}/>
-                )}
+              
+              
+                <span className='text-sm'>Logout</span>
+                
             </span>
           </div>
         </div>
       )
       }
-      {/* 설정버튼 클릭시 열기 */}
-      {isOpen && (
-        <Sidebar isOpen={isOpen}
-        />
-      )}
+     
       <div
         style={{
           display: 'flex',

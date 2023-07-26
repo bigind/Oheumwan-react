@@ -6,9 +6,8 @@ import SidebarItem from "./SidebarItem";
 function Sidebar() {
 
   const menus = [
-    { name: "Login", path: "/" },
     { name: "Theme", path: "/members" },
-    { name: "캐시 관리", path: "/cashes" }
+    { name: "al", path: "/" }
   ];
 
   return (
