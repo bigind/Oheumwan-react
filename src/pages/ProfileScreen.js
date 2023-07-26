@@ -45,7 +45,7 @@ const ProfileScreen = () => {
       <div style={{ width: '100%', padding: 20 }}>
         <ProfileBody
           name="Sohui Han"
-          accountName="xeesoxee"
+          accountName="user1"
           profileImage={"img/sohee.jpg"}
           followers="3.6M"
           following="35"
@@ -55,7 +55,7 @@ const ProfileScreen = () => {
         <ProfileButtons
           id={0}
           name="Sohui Han"
-          accountName="xeesoxee"
+          accountName="user1"
           profileImage={"img/sohee.jpg"}
         />
         <ProfileTab />

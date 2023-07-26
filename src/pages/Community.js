@@ -29,7 +29,7 @@ const Community = () => {
     axios.get(`${apiEndpoint}?username=${username}`)
       .then(res => {
         const fetchedData = JSON.parse(res.data.body);
-        console.log(fetchedData);
+        console.log(fetchedData[0].author_id);
         setPost(fetchedData);
       })
       .catch(err => console.log(err))
@@ -127,6 +127,7 @@ const Community = () => {
                 // handlerEdit={handlerEdit}
                 handlerEdit={(item) => handlerEdit(item)}
                 selected={selected}
+                username={username}
               />
             ))}
 

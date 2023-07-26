@@ -1,23 +1,37 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useEffect} from 'react';
 import { FiSettings } from 'react-icons/fi';
-import { FaBars } from "react-icons/fa";
 import Card from './Card';
 import Sidebar from './Sidebar';
+import axios from 'axios';
 
 
-const images = [
-  'img/so1.jpg',
-  'img/so2.jpg',
-  'img/so3.jpg',
-  'img/so4.jpg',
-  'img/so5.jpg',
-  'img/so6.jpg',
-]
+// const images = [
+//   'img/so1.jpg',
+//   'img/so2.jpg',
+//   'img/so3.jpg',
+//   'img/so4.jpg',
+//   'img/so5.jpg',
+//   'img/so6.jpg',
+// ]
 
+
+const username = 'user1';
+const apiEndpoint = `https://xs21gvtq40.execute-api.eu-central-1.amazonaws.com/oheumwan/community`;
 
 const ProfileTab = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   // 프로필 아래 사진들이 쌓이는 부분
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${apiEndpoint}?username=${username}`)
+      .then(res => {
+        const fetchedData = JSON.parse(res.data.body);
+        console.log(fetchedData[fetchedData.length-1]);
+        setImages(fetchedData);
+      })
+      .catch(err => console.log(err))
+  }, [])
   const renderSectionOne = () => {
     return (
       <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
@@ -36,6 +50,7 @@ const ProfileTab = () => {
         }}
         >
         <img style={{ objectFit: 'cover', width: '100%', height: '100%' }} src={image} alt={`Image ${index}`} />
+        
         </div>
       ))}
     </div>
@@ -65,8 +80,8 @@ const ProfileTab = () => {
    
   );
 };
-
 export default ProfileTab;
+
 
 export const ProfileBody = ({
   name,

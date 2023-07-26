@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const apiEndpoint = `https://xs21gvtq40.execute-api.eu-central-1.amazonaws.com/oheumwan/community`;
 
-const Card = ({src, likes, content,handlerRemove}) => {
+const Card = ({src, likes, content,handlerRemove, username}) => {
 
     const images = {
         '1': process.env.PUBLIC_URL + '/img/so1.jpg',
@@ -14,18 +14,27 @@ const Card = ({src, likes, content,handlerRemove}) => {
         '3': process.env.PUBLIC_URL + '/img/so3.jpg'
     }
 
-
-    // const [popupOpen, setPopupOpen] = useState(false);
     const [popupOpen, setPopupOpen] = useState(false);
     const [edited, setEdited] = useState({});
     const [editedContent, setEditedContent] = useState(content);
-    // useEffect(() => {
-    //   setEdited({ content });
-    // }, []);
+    // const [like, setLike] = useState(false)
 
     useEffect(() => {
       setEdited({ content });
     }, [content]);
+
+    // useEffect(async () => {
+    //   const fetchData = async () => {
+    //     const res = await axios.get()
+    //     if (res.data.type === 'liked') setLike(true)
+    //   }
+    //   fetchData()
+    // }, []);
+
+    // const toggleLike = async (e) => {
+    //   const res = await axios.post() // [POST] 사용자가 좋아요를 누름 -> DB 갱신
+    //   setLike(!like)
+    // }
 
     const showPopup = () => {
         setPopupOpen(true);
@@ -66,7 +75,7 @@ const Card = ({src, likes, content,handlerRemove}) => {
         handlerEdit(item); // prop으로 받은 'handlerEdit' 함수 호출     
       };
     
-
+     
     
 
     return (
@@ -81,7 +90,7 @@ const Card = ({src, likes, content,handlerRemove}) => {
             className='object-cover w-10 h-10 rounded-full'/>
             
                 <div style={{ display: 'flex', flexDirection: 'column', marginLeft: 10, justifyContent: 'center'}}>
-                    <span style={{fontWeight: '500'}}>xeesoxee</span>
+                    <span style={{fontWeight: '500'}}>{username}</span>
                     <span>2023년 7월 11일</span>
                 </div>
                 </div>
@@ -108,7 +117,8 @@ const Card = ({src, likes, content,handlerRemove}) => {
         </div>
         <div style={{ height: 45 , marginLeft: 10}}>
             <button>
-                <FiHeart className='text-black' />
+                <FiHeart className='text-black'/>
+                {/* <HeartButton like={like} onClick={toggleLike}/> */}
             </button>
             <button className='p-3'>
                 <FiMessageCircle className='text-black' />
@@ -119,7 +129,7 @@ const Card = ({src, likes, content,handlerRemove}) => {
         </div>
         <div className='pb-5'>
         <span>
-        <span className='font-black ml-2'>xeesoxee </span>{editedContent}</span>
+        <span className='font-black ml-2'>{username}</span>{editedContent}</span>
         </div>
         <hr/>
         </>
