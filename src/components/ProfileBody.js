@@ -2,22 +2,14 @@ import React, {useState, useEffect} from 'react';
 import { FiSettings } from 'react-icons/fi';
 import Card from './Card';
 import axios from 'axios';
-
-
-// const images = [
-//   'img/so1.jpg',
-//   'img/so2.jpg',
-//   'img/so3.jpg',
-//   'img/so4.jpg',
-//   'img/so5.jpg',
-//   'img/so6.jpg',
-// ]
+import { Link } from 'react-router-dom';
+import EditProfile from './EditProfile';
 
 
 const username = 'user1';
 const apiEndpoint = `https://xs21gvtq40.execute-api.eu-central-1.amazonaws.com/oheumwan/community`;
 
-const ProfileTab = () => {
+const ProfileTab = ({profileImage}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   // 프로필 아래 사진들이 쌓이는 부분
   const [images, setImages] = useState([]);
@@ -26,8 +18,9 @@ const ProfileTab = () => {
     axios.get(`${apiEndpoint}?username=${username}`)
       .then(res => {
         const fetchedData = JSON.parse(res.data.body);
-        console.log(fetchedData[fetchedData.length-1]);
-        setImages(fetchedData);
+        const extractedImages = fetchedData.map(item => item.image_path);
+        console.log(extractedImages);
+        setImages(extractedImages);
       })
       .catch(err => console.log(err))
   }, [])
@@ -70,11 +63,16 @@ const ProfileTab = () => {
     }
   };
 
+  console.log(profileImage);
   return (
     <div>
       <div>
           {renderSection()}
+          <div className='hidden'>
+          <EditProfile profileImage={profileImage} />
+          </div>
       </div>
+      
     </div>
    
   );
@@ -101,7 +99,6 @@ export const ProfileBody = ({
             <span className='text-lg font-bold'>
               {accountName}
             </span>
-            {/* 설정(setting) 버튼 */}
             <span className='text-xl text-black text-right'>
               
               
@@ -156,89 +153,33 @@ export const ProfileBody = ({
 export const ProfileButtons = ({ id, name, accountName, profileImage }) => {
     const [follow, setFollow] = useState(false);
 
-    const handleEditProfile = () => {
-    };
-    
     return (
       <>
         {id === 0 ? (
-          <div
-            style={{
-              width: '100%',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-            className='w-full flex-row items-center justify-center'
-          >
-            <button
-              onClick={handleEditProfile}
-              style={{
-                width: '100%'
-              }}
-            >
-              <div
-                className='w-full h-10' 
-              >
-                <span
-                  style={{
-                    fontWeight: 'bold',
-                    fontSize: 14,
-                    letterSpacing: 1,
-                    opacity: 0.8,
-                    alignItems: 'center',
-                    width: '100%'
-                  }}
-                  className='font-bold text-lg items-center w-full '
-                >
-                  Edit Profile
-                </span>
-              </div>
-            </button>
-          </div>
-        ) : (
-          <div
-            style={{
-              width: '100%',
-              flexDirection: 'row',
-              justifyContent: 'space-evenly',
-              alignItems: 'center',
-            }}
-          >
-            <button
-              onClick={() => setFollow(!follow)}
-              style={{ width: '42%' }}
-            >
-              <div
-                style={{
-                  width: '100%',
-                  height: 35,
-                  borderRadius: 5,
-                  backgroundColor: follow ? null : '#3493D9',
-                  borderWidth: follow ? 1 : 0,
-                  borderColor: '#DEDEDE',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <span style={{ color: follow ? 'black' : 'white' }}>
-                  {follow ? 'Following' : 'Follow'}
-                </span>
-              </div>
-            </button>
-            <div
-              style={{
-                width: '10%',
-                height: 35,
-                borderWidth: 1,
-                borderColor: '#DEDEDE',
-                borderRadius: 5,
-              }}
-            >
-            
+          <div className='pb-5'>
+            <div className="w-full flex items-center justify-center rounded-lg  border-solid border-neutral-500 border ">
+              <Link to="/profile/edit">
+                <div className="w-full h-8 flex justify-center items-center">
+                  <span className="text-sm">Edit Profile</span>
+                </div>
+              </Link>
             </div>
           </div>
-        )}
+        
+
+        ) : (
+          <div className="w-full flex justify-center space-x-4 items-center">
+            <button
+              onClick={() => setFollow(!follow)}
+              className={`w-42 h-9 rounded-lg ${follow ? "border border-gray-400" : "border-none"} ${follow ? "bg-white" : "bg-blue-500"} flex justify-center items-center`}
+            >
+              <span className={`font-bold ${follow ? "text-black" : "text-white"}`}>
+                {follow ? "Following" : "Follow"}
+              </span>
+            </button>
+          <div className="w-10 h-9 border border-gray-400 rounded-lg"></div>
+        </div>
+       )}
       </>
     );
   };

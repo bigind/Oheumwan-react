@@ -58,7 +58,9 @@ const ProfileScreen = () => {
           accountName="user1"
           profileImage={"img/sohee.jpg"}
         />
-        <ProfileTab />
+        <ProfileTab
+        profileImage={"img/sohee.jpg"} 
+        />
       </div>
       <div>
       </div>

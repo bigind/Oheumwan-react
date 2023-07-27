@@ -17,24 +17,11 @@ const Card = ({src, likes, content,handlerRemove, username}) => {
     const [popupOpen, setPopupOpen] = useState(false);
     const [edited, setEdited] = useState({});
     const [editedContent, setEditedContent] = useState(content);
-    // const [like, setLike] = useState(false)
-
+   
     useEffect(() => {
       setEdited({ content });
     }, [content]);
 
-    // useEffect(async () => {
-    //   const fetchData = async () => {
-    //     const res = await axios.get()
-    //     if (res.data.type === 'liked') setLike(true)
-    //   }
-    //   fetchData()
-    // }, []);
-
-    // const toggleLike = async (e) => {
-    //   const res = await axios.post() // [POST] 사용자가 좋아요를 누름 -> DB 갱신
-    //   setLike(!like)
-    // }
 
     const showPopup = () => {
         setPopupOpen(true);
