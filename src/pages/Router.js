@@ -83,6 +83,17 @@ const Router = () => {
                                             이미지 인식 페이지
                                         </td>
                                     </tr>
+                                    <tr className="bg-gray-100 border-b">
+                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                            <Link to="/login"> login </Link>
+                                        </td>
+                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                            /login
+                                        </td>
+                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                            카카오 로그인
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
