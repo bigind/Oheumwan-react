@@ -1,9 +1,13 @@
 import React, {useState} from "react";
+import { useNavigate } from "react-router-dom";
+import Add from "../components/Add";
+
 const Check = () => {
     //재료 리스트(이미지 예시)
-    
-    const [isChecked, setIsChecked] = useState(true);
-    const [products, setProducts] = useState([
+    const [addOpen, setAddOpen] = useState(false);
+
+    const [
+        ingredients, setIngredients] = useState([
         {
           id: 1,
           imgSrc: 'https://seed2plant.in/cdn/shop/products/saladcucumberseeds.jpg?v=1603435556',
@@ -54,14 +58,30 @@ const Check = () => {
         },
       ]);
       
-    // const handleCheckboxChange = (event) => {setIsChecked(event.target.checked);};
+    const navigate = useNavigate();
 
+    const handleCancelClick = () => {
+    navigate("/home");
+    };
+    
+    //개별로 체크 true/false가 가능하도록 함
     const handleCheckboxChange = (id) => {
-        const updatedProducts = products.map((product) =>
-          product.id === id ? { ...product, checked: !product.checked } : product
+        const updatedIngredients = ingredients.map((ingredient) =>
+          ingredient.id === id ? { ...ingredient, checked: !ingredient.checked } : ingredient
         );
-        setProducts(updatedProducts); // 변경된 재료 목록으로 업데이트
+        setIngredients(updatedIngredients); // 변경된 재료 목록으로 업데이트
+    };
+
+    const handleAddOpen = () => {
+        setAddOpen(true);
       };
+    
+      const handleAddCancel = () => {
+        setAddOpen(false);
+      };
+
+    
+
   
       
 
@@ -69,28 +89,37 @@ const Check = () => {
         
       <div className="flex flex-wrap w-full items-center text-center h-screen pt-3
       place-items-center">
+       {addOpen && (
+      <div className="fixed left-0 top-0 w-screen h-screen flex justify-center items-center bg-black bg-opacity-70">
+        <div className="bg-white rounded shadow-lg w-10/12 md:w-1/3">
+          <Add handleAddCancel={handleAddCancel} />
+        </div>
+      </div>
+    )}
         <h1 className="w-full">인식한 재료가 일치한가요?</h1>
         {/* 각 재료 사진 */}
         <div className="w-full h-3/5 p-1 overflow-y-auto">
-        {products.map((product) => (
-          <div key={product.id} className="w-full h-1/12 p-1 items-center">
+        {ingredients.map((ingredient) => (
+          <div key={ingredient.id} className="w-full h-1/12 p-1 items-center">
             <div className="text-center  flex flex-row items-center justify-center">
             <div>
-              <img src={product.imgSrc} className="max-w-60 h-10 object-cover" alt="인식된 재료" />
+              <img src={ingredient.imgSrc} className="max-w-60 h-10 object-cover" alt="인식된 재료" />
             </div>
-            <h5 className="text-sm font-normal mt-2 pl-3">{product.title}</h5>
-            <input className="mt-2 ml-2" type="checkbox" checked={product.checked} onChange={() => handleCheckboxChange(product.id)}/>
+            <h5 className="text-sm font-normal mt-2 pl-3">{ingredient.title}</h5>
+            <input className="mt-2 ml-2" type="checkbox" checked={ingredient.checked} onChange={() => handleCheckboxChange(ingredient.id)}/>
             </div>
           </div>
         ))}
         
       </div>
         <div className="w-full items-center flex justify-center">
-            <div className="w-1/3 h-8 flex justify-between ">
-            <button className="border border-2 border-solid rounded-lg w-10">추가</button>
+            <div className="w-3/5 h-8 flex justify-between ">
+            <button className="border border-2 border-solid rounded-lg w-10" onClick={handleAddOpen}>추가</button>
             <button className="border border-2 border-solid rounded-lg w-10">저장</button>
+            <button className="border border-2 border-solid rounded-lg w-10" onClick={handleCancelClick}>취소</button>
             </div>
         </div>
+        
       </div>
     );
   };
