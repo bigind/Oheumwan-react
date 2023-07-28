@@ -13,7 +13,7 @@ const ProfileTab = ({profileImage}) => {
   // 프로필 아래 사진들이 쌓이는 부분
   const [images, setImages] = useState([]);
 
-  // 이미지를 하나씩 가져오는 코드
+  // 사용자의 포스트를 모두 가져오는 요청
   useEffect(() => {
     axios.get(`${apiEndpoint}?username=${username}`)
       .then(res => {

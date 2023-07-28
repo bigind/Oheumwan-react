@@ -7,11 +7,11 @@ const Login = () => {
 
     return(
         <>
-            <div className="flex h-screen w-full items-center bg-white bg-cover bg-no-repeat">
+            <div className="flex h-screen w-full justify-center items-center bg-orange-100 bg-cover bg-no-repeat">
 
-                <div className="text-black justify-start items-center flex flex-col">
+                <div className="text-black justify-center items-center flex flex-col">
                     <div className="mb-2 flex flex-col items-center">
-                        <img src="/img/logo.jpg" className="w-5/4 pb-8" alt="" srcSet="" />
+                        <img src="/img/logo.png" className="w-5/4 pb-8" alt="" srcSet="" />
                         <h1 className="pb-8 text-2xl font-light italic text-yellow-800">Oheumwan</h1>
                         {/*<span class="text-gray-300">Enter Login Details</span>*/}
                     </div>

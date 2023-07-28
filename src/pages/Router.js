@@ -94,6 +94,17 @@ const Router = () => {
                                             카카오 로그인
                                         </td>
                                     </tr>
+                                    <tr className="bg-gray-100 border-b">
+                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                            <Link to="/collect"> collect </Link>
+                                        </td>
+                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                            /collect
+                                        </td>
+                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                            보관함 페이지
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
