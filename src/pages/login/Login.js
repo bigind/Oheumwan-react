@@ -7,12 +7,12 @@ const Login = () => {
 
     return(
         <>
-            <div className="flex h-screen w-full items-center justify-center bg-stone-300 bg-cover bg-no-repeat">
+            <div className="flex h-screen w-full items-center bg-white bg-cover bg-no-repeat">
 
-                <div className="text-black">
-                    <div className="mb-8 flex flex-col items-center">
-                        <img src="https://www.logo.wine/a/logo/Instagram/Instagram-Glyph-Color-Logo.wine.svg" width="150" alt="" srcSet="" />
-                        <h1 className="mb-2 text-2xl">Oheumwan</h1>
+                <div className="text-black justify-start items-center flex flex-col">
+                    <div className="mb-2 flex flex-col items-center">
+                        <img src="/img/logo.jpg" className="w-5/4 pb-8" alt="" srcSet="" />
+                        <h1 className="pb-8 text-2xl font-light italic text-yellow-800">Oheumwan</h1>
                         {/*<span class="text-gray-300">Enter Login Details</span>*/}
                     </div>
                     <button onClick={() => {
