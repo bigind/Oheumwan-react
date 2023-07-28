@@ -1,5 +1,6 @@
 import React, { Component, useState, useEffect } from 'react';
-import { FiHeart, FiMessageCircle, FiMoreHorizontal } from 'react-icons/fi';
+import { FiHeart} from 'react-icons/fi';
+import {FaComment,FaRegComment} from 'react-icons/fa'
 import Edit from './Edit';
 import CommentList from './CommentList';
 import axios from 'axios';
@@ -17,10 +18,9 @@ const Card = ({ src, likes, content, handlerRemove, username }) => {
   const [popupOpen, setPopupOpen] = useState(false);
   const [edited, setEdited] = useState({});
   const [editedContent, setEditedContent] = useState(content);
-  const [cmtModalOpen, setCmtModalOpen] = useState(false);
+  const [isCommentListOpen, setCommentListOpen] = useState(false);
   const [comment, setComment] = useState('');
   const [cardComments, setCardComments] = useState([]);
-  const [isValid, setIsValid] = useState(false);
  
 
   useEffect(() => {
@@ -63,24 +63,23 @@ const Card = ({ src, likes, content, handlerRemove, username }) => {
     handlerEdit(item); // prop으로 받은 'handlerEdit' 함수 호출     
   };
 
-  const handlerComment = () => {
-    if (setCmtModalOpen(true)) {
-      setCmtModalOpen(false);
-      console.log(cmtModalOpen);
-    }
-    else {
-    setCmtModalOpen(true);
-    console.log(cmtModalOpen);
-    }
+  const toggleCommentList = () => {
+    setCommentListOpen((prevState) => !prevState);
   }
 
-  const handlerCommentPost = (e) => {
-    const copy = [...cardComments];
-    copy.push(comment);
-    setCardComments(copy);
-    setComment('');
-  } 
+  const getButtonIcon = () => {
+    return isCommentListOpen ? <FaComment /> : <FaRegComment />;
+  };
 
+  const handlerCommentPost = () => {
+    if (comment.trim().length > 0)
+     {
+      const copy = [...cardComments];
+      copy.push(comment);
+      setCardComments(copy);
+      setComment('');
+    }
+};
 
 
   return (
@@ -116,14 +115,12 @@ const Card = ({ src, likes, content, handlerRemove, username }) => {
         <img src={src ? src : images['1']} alt="image" style={{ minHeight: 200, width: '100%', flex: 1 }} />
       </div>
       <div style={{ height: 45, marginLeft: 10 }}>
+        {/* 댓글버튼 클릭 시 색이 채워지며 commentList출력 */}
         <button>
           <FiHeart className='text-black' />
-          {/* <HeartButton like={like} onClick={toggleLike}/> */}
         </button>
-        <button className='p-3'>
-          <FiMessageCircle 
-          onClick={handlerComment}
-           className='text-black' />
+        <button onClick={toggleCommentList} className='p-3'>
+           {getButtonIcon()}
         </button>
        </div>
       
@@ -135,23 +132,24 @@ const Card = ({ src, likes, content, handlerRemove, username }) => {
           <span className='font-black ml-2 pr-3'>{username}</span>{editedContent}</span>
       </div>
       <div className='ml-2'>
-      {cardComments.map((commentArr,i) => {
-        return(
-          <CommentList
-          username={username}
-          userComment={commentArr}
-          key = {i} />
-        )
-      })}
-      <input className="border border-2 border-solid w-11/12" type='text' placeholder='상대방을 배려하며 소통합시다 :>' onChange={e=> {
-        setComment(e.target.value);
-      }}
-      onKeyUp={ e => {
-        e.target.value.length > 0
-        ? setIsValid(true)
-        : setIsValid(false);
-      }}/>
-      <button onClick={handlerCommentPost} disabled={isValid ? false : true }>입력</button>
+        {/* 버튼 클릭시 토글방식으로 댓글창 출력 */}
+      {isCommentListOpen && (
+        <>
+        {cardComments.map((commentArr,i) => {
+          return(
+            <CommentList
+            username={username}
+            userComment={commentArr}
+            key = {i} />
+          )
+        })}
+        <input className="border border-2 border-solid w-11/12" type='text' placeholder='상대방을 배려하며 소통합시다 :>'
+        onChange={e=> {
+        setComment(e.target.value)}}
+      />
+      <button onClick={handlerCommentPost}
+       >입력</button>
+        </>)}
       </div>
       
       <hr />
@@ -160,10 +158,3 @@ const Card = ({ src, likes, content, handlerRemove, username }) => {
 };
 
 export default Card;
-const styles = {
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-};
