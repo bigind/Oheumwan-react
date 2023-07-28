@@ -1,14 +1,10 @@
 const Login = () => {
     const Rest_api_key='a467cb476cd5ac847ed6ce10094ddfcf' //REST API KEY
     const redirect_uri = 'http://localhost:3000/auth' //Redirect URI
+
     // oauth 요청 URL
     const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&redirect_uri=${redirect_uri}&response_type=code`
 
-    const handleLogin = ()=>{
-        window.location.href = kakaoURL;
-        const code = new URL(window.location.href).searchParams.get("code");
-        console.log(code);
-    }
     return(
         <>
             <div className="flex h-screen w-full items-center justify-center bg-stone-300 bg-cover bg-no-repeat">
@@ -19,7 +15,10 @@ const Login = () => {
                         <h1 className="mb-2 text-2xl">Oheumwan</h1>
                         {/*<span class="text-gray-300">Enter Login Details</span>*/}
                     </div>
-                    <button onClick={handleLogin}>
+                    <button onClick={() => {
+                        // window.location.href = kakaoURL;
+                        window.ReactNativeWebView.postMessage(JSON.stringify('true'));
+                    }}>
                         <img src={"https://oheumwan-image-upload.s3.eu-central-1.amazonaws.com/kakao_login_medium_wide.png"} alt={"카카오 로그인"}/>
                     </button>
                 </div>

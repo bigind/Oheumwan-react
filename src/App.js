@@ -20,7 +20,7 @@ function App() {
              <Route path="/community" element={<Community/>}></Route>
              <Route path="/getimage" element={<GetImage/>}></Route>
              <Route path="/login" element={<Login/>}></Route>
-            <Route path="/auth" element={<LoginAuth/>}></Route>
+             <Route path="/auth" element={<LoginAuth/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>
