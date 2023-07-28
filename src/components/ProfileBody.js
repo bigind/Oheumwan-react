@@ -3,7 +3,6 @@ import { FiSettings } from 'react-icons/fi';
 import Card from './Card';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import EditProfile from './EditProfile';
 
 
 const username = 'user1';
@@ -14,6 +13,7 @@ const ProfileTab = ({profileImage}) => {
   // 프로필 아래 사진들이 쌓이는 부분
   const [images, setImages] = useState([]);
 
+  // 이미지를 하나씩 가져오는 코드
   useEffect(() => {
     axios.get(`${apiEndpoint}?username=${username}`)
       .then(res => {
@@ -24,6 +24,8 @@ const ProfileTab = ({profileImage}) => {
       })
       .catch(err => console.log(err))
   }, [])
+
+
   const renderSectionOne = () => {
     return (
       <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
@@ -68,9 +70,7 @@ const ProfileTab = ({profileImage}) => {
     <div>
       <div>
           {renderSection()}
-          <div className='hidden'>
-          <EditProfile profileImage={profileImage} />
-          </div>
+          
       </div>
       
     </div>
@@ -127,10 +127,10 @@ export const ProfileBody = ({
             className='object-cover w-20 h-20 rounded-full'
           alt="Profile"
           /><br/>
-          <span 
+          {/* <span 
           className='mt-2 pt-1 font-bold'>
             {name}
-          </span>
+          </span> */}
         </div>
         <div className='items-center'>
           <span className='font-bold text-lg' 
@@ -158,15 +158,11 @@ export const ProfileButtons = ({ id, name, accountName, profileImage }) => {
         {id === 0 ? (
           <div className='pb-5'>
             <div className="w-full flex items-center justify-center rounded-lg  border-solid border-neutral-500 border ">
-              <Link to="/profile/edit">
                 <div className="w-full h-8 flex justify-center items-center">
-                  <span className="text-sm">Edit Profile</span>
+                  <span className="text-sm cursor-pointer">Edit Profile</span>
                 </div>
-              </Link>
             </div>
           </div>
-        
-
         ) : (
           <div className="w-full flex justify-center space-x-4 items-center">
             <button

@@ -11,9 +11,9 @@ const Login = () => {
     }
     return(
         <>
-            <div className="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat">
+            <div className="flex h-screen w-full items-center justify-center bg-stone-300 bg-cover bg-no-repeat">
 
-                <div className="text-white">
+                <div className="text-black">
                     <div className="mb-8 flex flex-col items-center">
                         <img src="https://www.logo.wine/a/logo/Instagram/Instagram-Glyph-Color-Logo.wine.svg" width="150" alt="" srcSet="" />
                         <h1 className="mb-2 text-2xl">Oheumwan</h1>
