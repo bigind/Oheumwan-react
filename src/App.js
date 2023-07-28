@@ -8,6 +8,7 @@ import GetImage from './pages/GetImage';
 import Login from "./pages/login/Login";
 import LoginAuth from "./pages/login/LoginAuth";
 import Collect from './pages/Collect';
+import Check from './pages/Check';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
              <Route path="/login" element={<Login/>}></Route>
              <Route path="/auth" element={<LoginAuth/>}></Route>
              <Route path="/collect" element={<Collect/>}></Route>
+             <Route path="/check" element={<Check/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>
