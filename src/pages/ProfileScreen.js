@@ -12,7 +12,7 @@ const ProfileScreen = () => {
 
   const [editProfile, setEditProfile] = useState(false);
 
-  console.log(setUserIntroduce);
+  console.log(userIntroduce);
   
 
 
@@ -76,7 +76,7 @@ const ProfileScreen = () => {
 
         {editProfile && 
         (
-          <EditProfile setUserIntroduce={setUserIntroduce}/>
+          <EditProfile userIntroduce={userIntroduce}/>
         )}
         
         {/* 유저 소개 수정 버튼 */}

@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import {AiOutlineCheckCircle} from "react-icons/ai";
 
-const EditProfile = ({setUserIntroduce}) => {
+const EditProfile = ({userIntroduce}) => {
     const [profileComment, setProfileComment] = useState("");
 
     useEffect(() => {
-        setProfileComment(setUserIntroduce);
-    }, [setUserIntroduce]);
+        setProfileComment(userIntroduce);
+    }, [userIntroduce]);
 
     const onProfileEditChange = (e) => {
         setProfileComment(e.target.value);
     }
 
     const handleSaveProfile = () => {
-        setUserIntroduce(profileComment); // 수정된 소개 정보 저장
+        userIntroduce(profileComment); // 수정된 소개 정보 저장
       };
 
     return(
