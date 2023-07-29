@@ -139,12 +139,13 @@ const Card = ({ src, likes, content, handlerRemove, username, creationDate }) =>
             key = {i} />
           )
         })}
-        <input className="border border-2 border-solid w-11/12" type='text' placeholder='상대방을 배려하며 소통합시다 :>'
-        onChange={e=> {
-        setComment(e.target.value)}}
-      />
-      <button onClick={handlerCommentPost}
-       >입력</button>
+        <div className='flex'>
+          <input className="border border-2 border-solid w-11/12" type='text' placeholder='상대방을 배려하며 소통합시다 :>'
+          onChange={e=> {
+          setComment(e.target.value)}}
+          />
+          <button className='' onClick={handlerCommentPost}>입력</button>
+        </div>
         </>)}
       </div>
       
