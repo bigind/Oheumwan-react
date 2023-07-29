@@ -10,12 +10,6 @@ const imageURL = `https://oheumwan-image-upload.s3.eu-central-1.amazonaws.com/`
 
 const Card = ({ src, likes, content, handlerRemove, username, creationDate }) => {
 
-  const images = {
-    '1': process.env.PUBLIC_URL + '/img/so1.jpg',
-    '2': process.env.PUBLIC_URL + '/img/so2.jpg',
-    '3': process.env.PUBLIC_URL + '/img/so3.jpg'
-  }
-
   const [popupOpen, setPopupOpen] = useState(false);
   const [edited, setEdited] = useState({});
   const [editedContent, setEditedContent] = useState(content);
