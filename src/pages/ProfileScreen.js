@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ProfileTab, { ProfileBody, ProfileButtons } from '../components/ProfileBody';
+import EditProfile from '../components/EditProfile';
 
 const ProfileScreen = () => {
   let circuls = [];
@@ -8,6 +9,10 @@ const ProfileScreen = () => {
   const [username,setUsername] = useState("user1");
   const [userIntroduce, setUserIntroduce] = useState("안녕하세요, 한소희입니다.");
   const [userPostConut, setUserPostConut] = useState(500);
+
+  const [editProfile, setEditProfile] = useState(false);
+
+  console.log(setUserIntroduce);
   
 
 
@@ -31,7 +36,6 @@ const ProfileScreen = () => {
               alignItems: 'center',
             }}
           >
-            <span style={{ fontSize: 40, color: 'black' }}>+</span>
           </div>
         ) : (
           <div
@@ -47,6 +51,10 @@ const ProfileScreen = () => {
         )}
       </div>,
     );
+  }
+
+  const handleProfileEditOpen = () => {
+    setEditProfile(true);
   }
 
   return (
@@ -65,13 +73,18 @@ const ProfileScreen = () => {
         
         {/* 유저 소개 */}
         <div style={{paddingLeft: 20, paddingBottom: 10}}>{userIntroduce}</div>
-        
+
+        {editProfile && 
+        (
+          <EditProfile setUserIntroduce={setUserIntroduce}/>
+        )}
         
         {/* 유저 소개 수정 버튼 */}
         <ProfileButtons
+          handleProfileEditOpen={handleProfileEditOpen}
           id={0}
           name="Sohui Han"
-          accountName="user1"
+          accountName={username}
           profileImage={"img/sohee.jpg"}
         />
 

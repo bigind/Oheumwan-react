@@ -24,6 +24,8 @@ const Edit = ({selectedData, handlerCancel, handlerEditSubmit, handlerRemove}) =
         handlerRemove(selectedData.post_id);
          onCancel();
     }
+
+    console.log(selectedData);
    
 
     return(
