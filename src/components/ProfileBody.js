@@ -14,6 +14,7 @@ const ProfileTab = ({profileImage}) => {
   // 프로필 아래 사진들이 쌓이는 부분
   const [images, setImages] = useState([]);
 
+
   // 사용자의 포스트를 모두 가져오는 요청
   useEffect(() => {
     axios.get(`${apiEndpoint}?username=${username}`)
@@ -66,7 +67,8 @@ const ProfileTab = ({profileImage}) => {
     }
   };
 
-  console.log(profileImage);
+
+
   return (
     <div>
       <div>
@@ -151,7 +153,7 @@ export const ProfileBody = ({
   );
 }
 
-export const ProfileButtons = ({ id, name, accountName, profileImage }) => {
+export const ProfileButtons = ({ id, handleProfileEditOpen}) => {
     const [follow, setFollow] = useState(false);
 
     return (
@@ -160,11 +162,14 @@ export const ProfileButtons = ({ id, name, accountName, profileImage }) => {
           <div className='pb-5'>
             <div className="w-full flex items-center justify-center rounded-lg  border-solid border-neutral-500 border ">
                 <div className="w-full h-8 flex justify-center items-center">
-                  <span className="text-sm cursor-pointer">Edit Profile</span>
+                  <span  
+                  onClick={handleProfileEditOpen}
+                  className="text-sm cursor-pointer">Edit Profile</span>
                 </div>
             </div>
           </div>
-        ) : (
+        ) 
+        : (
           <div className="w-full flex justify-center space-x-4 items-center">
             <button
               onClick={() => setFollow(!follow)}
@@ -176,7 +181,8 @@ export const ProfileButtons = ({ id, name, accountName, profileImage }) => {
             </button>
           <div className="w-10 h-9 border border-gray-400 rounded-lg"></div>
         </div>
-       )}
+       )
+       }
       </>
     );
   };
