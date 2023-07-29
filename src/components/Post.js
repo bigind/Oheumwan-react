@@ -28,8 +28,6 @@ const Post = ({setModalOpen, handleImageUpload, handlePostSubmit}) => {
             setImgFile(reader.result);
             handleImageUpload(file);
         };
-
-        
     };
 
 

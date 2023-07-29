@@ -25,11 +25,22 @@ const Community = () => {
     fileName = uploadedImages[uploadedImages.length - 1].name;
   }
 
+  // useEffect(() => {
+  //   axios.get(`${apiEndpoint}?username=${username}`)
+  //     .then(res => {
+  //       const fetchedData = JSON.parse(res.data.body);
+  //       console.log(fetchedData[0].author_id);
+  //       setPost(fetchedData);
+  //     })
+  //     .catch(err => console.log(err))
+  // }, [])
+
+  // 서버에서 모든 게시글을 가져옴.
   useEffect(() => {
-    axios.get(`${apiEndpoint}?username=${username}`)
+    axios.get(`${apiEndpoint}2`)
       .then(res => {
         const fetchedData = JSON.parse(res.data.body);
-        console.log(fetchedData[0].author_id);
+        console.log(fetchedData);
         setPost(fetchedData);
       })
       .catch(err => console.log(err))
@@ -122,9 +133,10 @@ const Community = () => {
                 src={item.image_path} 
                 likes="0"
                 content={item.content}
-                handlerRemove={() => handlerRemove(item.post_id)} // post_id를 prop 전달
+                creationDate={item.creation_date}
                 // handlerEditSubmit={handlerEditSubmit}
                 // handlerEdit={handlerEdit}
+                handlerRemove={() => handlerRemove(item.post_id)} // post_id를 prop 전달
                 handlerEdit={(item) => handlerEdit(item)}
                 selected={selected}
                 username={username}

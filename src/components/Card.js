@@ -6,8 +6,9 @@ import CommentList from './CommentList';
 import axios from 'axios';
 
 const apiEndpoint = `https://xs21gvtq40.execute-api.eu-central-1.amazonaws.com/oheumwan/community`;
+const imageURL = `https://oheumwan-image-upload.s3.eu-central-1.amazonaws.com/`
 
-const Card = ({ src, likes, content, handlerRemove, username }) => {
+const Card = ({ src, likes, content, handlerRemove, username, creationDate }) => {
 
   const images = {
     '1': process.env.PUBLIC_URL + '/img/so1.jpg',
@@ -82,6 +83,7 @@ const Card = ({ src, likes, content, handlerRemove, username }) => {
 };
 
 
+
   return (
     <>
       <div>
@@ -95,7 +97,7 @@ const Card = ({ src, likes, content, handlerRemove, username }) => {
 
               <div style={{ display: 'flex', flexDirection: 'column', marginLeft: 10, justifyContent: 'center' }}>
                 <span style={{ fontWeight: '500' }}>{username}</span>
-                <span>2023년 7월 11일</span>
+                <span>{creationDate}</span>
               </div>
             </div>
             {!popupOpen && (
@@ -112,7 +114,7 @@ const Card = ({ src, likes, content, handlerRemove, username }) => {
         </div>
       </div>
       <div style={{ textAlign: 'center' }}>
-        <img src={src ? src : images['1']} alt="image" style={{ minHeight: 200, width: '100%', flex: 1 }} />
+        <img src={imageURL + src} alt="image" style={{ minHeight: 200, width: '100%', flex: 1 }} />
       </div>
       <div style={{ height: 45, marginLeft: 10 }}>
         {/* 댓글버튼 클릭 시 색이 채워지며 commentList출력 */}

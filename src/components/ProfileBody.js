@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 const username = 'user1';
 const apiEndpoint = `https://xs21gvtq40.execute-api.eu-central-1.amazonaws.com/oheumwan/community`;
+const imageURL = `https://oheumwan-image-upload.s3.eu-central-1.amazonaws.com/`
 
 const ProfileTab = ({profileImage}) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -43,7 +44,7 @@ const ProfileTab = ({profileImage}) => {
           objectFit: 'cover'
         }}
         >
-        <img style={{ objectFit: 'cover', width: '100%', height: '100%' }} src={image} alt={`Image ${index}`} />
+        <img style={{ objectFit: 'cover', width: '100%', height: '100%' }} src={imageURL + image} alt={`Image ${index}`} />
         
         </div>
       ))}
