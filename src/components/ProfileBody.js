@@ -148,22 +148,23 @@ export const ProfileBody = ({
   );
 }
 
-export const ProfileButtons = ({ id, handleProfileEditOpen,editProfile}) => {
-  console.log(editProfile);
-    return (
-      <>
-       {(id === 0 && !editProfile) && (
+
+export const ProfileButtons = ({ id, handleEditProfileButtonClick}) => {
+
+  return (
+    <>
+      {id === 0 && (
         <div className="pb-5">
           <div className="w-full flex items-center justify-center rounded-lg border-solid border-neutral-500 border">
             <div className="w-full h-8 flex justify-center items-center">
-              <span onClick={handleProfileEditOpen} className="text-sm cursor-pointer">
+              <span 
+              onClick={handleEditProfileButtonClick}className="text-sm cursor-pointer">
                 Edit Profile
               </span>
             </div>
           </div>
-       </div>
+        </div>
       )}
-      </>
-    );
-  };
-
+    </>
+  );
+};

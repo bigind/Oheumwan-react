@@ -49,9 +49,10 @@ const ProfileScreen = () => {
     );
   }
 
-  const handleProfileEditOpen = () => {
+  const handleEditProfileButtonClick = () => {
+    // 프로필 수정 버튼 클릭 시 editProfile 상태 변경
     setEditProfile(true);
-  }
+  };
 
   return (
     <div style={{ width: '100%', height: '100%', backgroundColor: 'white'}}>
@@ -74,17 +75,19 @@ const ProfileScreen = () => {
 
         {editProfile && 
         (
-          <EditProfile userIntroduce={userIntroduce} setUserIntroduce={setUserIntroduce} />
+          <EditProfile userIntroduce={userIntroduce} setUserIntroduce={setUserIntroduce} setEditProfile={setEditProfile} />
         )}
         
         {/* 유저 소개 수정 버튼 */}
         <ProfileButtons
-          handleProfileEditOpen={handleProfileEditOpen}
+          // handleProfileEditOpen={handleProfileEditOpen}
+          handleEditProfileButtonClick={handleEditProfileButtonClick}
           id={0}
           name="Sohui Han"
           accountName={username}
           profileImage={"img/sohee.jpg"}
           editProfile={editProfile}
+          setEditProfile={setEditProfile}
         />
 
         {/* 유저 게시글 썸네일 이미지 모음 */}
