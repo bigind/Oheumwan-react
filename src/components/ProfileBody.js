@@ -21,7 +21,6 @@ const ProfileTab = ({profileImage}) => {
       .then(res => {
         const fetchedData = JSON.parse(res.data.body);
         const extractedImages = fetchedData.map(item => item.image_path);
-        console.log(extractedImages);
         setImages(extractedImages);
       })
       .catch(err => console.log(err))
@@ -130,10 +129,6 @@ export const ProfileBody = ({
             className='object-cover w-20 h-20 rounded-full'
           alt="Profile"
           /><br/>
-          {/* <span 
-          className='mt-2 pt-1 font-bold'>
-            {name}
-          </span> */}
         </div>
         <div className='items-center'>
           <span className='font-bold text-lg' 
@@ -153,36 +148,21 @@ export const ProfileBody = ({
   );
 }
 
-export const ProfileButtons = ({ id, handleProfileEditOpen}) => {
-    const [follow, setFollow] = useState(false);
-
+export const ProfileButtons = ({ id, handleProfileEditOpen,editProfile}) => {
+  console.log(editProfile);
     return (
       <>
-        {id === 0 ? (
-          <div className='pb-5'>
-            <div className="w-full flex items-center justify-center rounded-lg  border-solid border-neutral-500 border ">
-                <div className="w-full h-8 flex justify-center items-center">
-                  <span  
-                  onClick={handleProfileEditOpen}
-                  className="text-sm cursor-pointer">Edit Profile</span>
-                </div>
+       {(id === 0 && !editProfile) && (
+        <div className="pb-5">
+          <div className="w-full flex items-center justify-center rounded-lg border-solid border-neutral-500 border">
+            <div className="w-full h-8 flex justify-center items-center">
+              <span onClick={handleProfileEditOpen} className="text-sm cursor-pointer">
+                Edit Profile
+              </span>
             </div>
           </div>
-        ) 
-        : (
-          <div className="w-full flex justify-center space-x-4 items-center">
-            <button
-              onClick={() => setFollow(!follow)}
-              className={`w-42 h-9 rounded-lg ${follow ? "border border-gray-400" : "border-none"} ${follow ? "bg-white" : "bg-blue-500"} flex justify-center items-center`}
-            >
-              <span className={`font-bold ${follow ? "text-black" : "text-white"}`}>
-                {follow ? "Following" : "Follow"}
-              </span>
-            </button>
-          <div className="w-10 h-9 border border-gray-400 rounded-lg"></div>
-        </div>
-       )
-       }
+       </div>
+      )}
       </>
     );
   };

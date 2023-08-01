@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {AiOutlineCheckCircle} from "react-icons/ai";
 
-const EditProfile = ({userIntroduce}) => {
+const EditProfile = ({userIntroduce, setUserIntroduce}) => {
     const [profileComment, setProfileComment] = useState("");
 
     useEffect(() => {
@@ -13,7 +13,7 @@ const EditProfile = ({userIntroduce}) => {
     }
 
     const handleSaveProfile = () => {
-        userIntroduce(profileComment); // 수정된 소개 정보 저장
+        setUserIntroduce(profileComment); // 수정된 소개 정보 저장
       };
 
     return(

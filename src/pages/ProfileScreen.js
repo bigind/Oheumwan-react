@@ -12,10 +12,6 @@ const ProfileScreen = () => {
 
   const [editProfile, setEditProfile] = useState(false);
 
-  console.log(userIntroduce);
-  
-
-
   // useEffect로 유저정보를 가져오는 코드
   // 여기서 가져와서 State에 넣기
 
@@ -72,11 +68,13 @@ const ProfileScreen = () => {
         />
         
         {/* 유저 소개 */}
+        {!editProfile && (
         <div style={{paddingLeft: 20, paddingBottom: 10}}>{userIntroduce}</div>
+        )}
 
         {editProfile && 
         (
-          <EditProfile userIntroduce={userIntroduce}/>
+          <EditProfile userIntroduce={userIntroduce} setUserIntroduce={setUserIntroduce} />
         )}
         
         {/* 유저 소개 수정 버튼 */}
@@ -86,6 +84,7 @@ const ProfileScreen = () => {
           name="Sohui Han"
           accountName={username}
           profileImage={"img/sohee.jpg"}
+          editProfile={editProfile}
         />
 
         {/* 유저 게시글 썸네일 이미지 모음 */}
