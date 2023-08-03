@@ -2,112 +2,162 @@ import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import Add from "../../components/Add";
 
-const IngredientCheck = () => {
-    //재료 리스트(이미지 예시)
-    const [addOpen, setAddOpen] = useState(false);
+const IngredientCheck = ({ data, setData, setIsLoading }) => {
 
-    const [
-        ingredients, setIngredients] = useState([
+    const ingredientsJSON = [
         {
-          id: 1,
-          imgSrc: 'https://seed2plant.in/cdn/shop/products/saladcucumberseeds.jpg?v=1603435556',
-          title: '오이',
-          checked: true,
+            "id": 0,
+            "imgSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT780ihzuR1_ijb1ba0zFXCNcxA3tw4h5nwvQantmC4IGtjiz87hG412pViS7T2d2EnQ7w&usqp=CAU",
+            "title": "양배추",
+            "checked": true
         },
         {
-          id: 2,
-          imgSrc: 'https://m.media-amazon.com/images/I/71S6oQqVa5L.jpg',
-          title: '당근',
-          checked: true,
+            "id": 1,
+            "imgSrc": "https://m.media-amazon.com/images/I/71S6oQqVa5L.jpg",
+            "title": "당근",
+            "checked": true
         },
         {
-          id: 3,
-          imgSrc: 'https://post.healthline.com/wp-content/uploads/2020/08/AN471-Pork-Meat-732x549-thumb.jpg',
-          title: '고기',
-          checked: true,
+            "id": 2,
+            "imgSrc": "https://media.istockphoto.com/id/1282866808/ko/%EC%82%AC%EC%A7%84/%EC%8B%A0%EC%84%A0%ED%95%9C-%EC%83%9D-%EB%8B%AD%EA%B3%A0%EA%B8%B0.jpg?s=612x612&w=0&k=20&c=R2M6I-Jx6lmJMS67aDJIptl5Srs34I493CSOoN1GIR0=",
+            "title": "닭고기",
+            "checked": true
         },
         {
-          id: 4,
-          imgSrc: 'https://m.media-amazon.com/images/I/71kb4tUZALL.jpg',
-          title: '옥수수',
-          checked: true,
+            "id": 3,
+            "imgSrc": "https://t1.daumcdn.net/cfile/tistory/1337644450067F2301",
+            "title": "오이",
+            "checked": true
         },
         {
-          id: 5,
-          imgSrc: 'https://img.taste.com.au/PRWBKAVs/taste/2007/10/garlic-182553-1.jpg',
-          title: '마늘',
-          checked: true,
+            "id": 4,
+            "imgSrc": "https://www.ktong.kr/wp-content/uploads/2020/06/%EA%B3%84%EB%9E%80-%EB%8B%A4%EC%9D%B4%EC%96%B4%ED%8A%B8-%EC%9D%98-%EB%86%80%EB%9D%BC%EC%9A%B4-%ED%9A%A8%EA%B3%BC.jpg",
+            "title": "계란",
+            "checked": true
         },
         {
-          id: 6,
-          imgSrc: 'https://img.choroc.com/newshop/goods/024444/024444_1.jpg',
-          title: '김치',
-          checked: true,
+            "id": 5,
+            "imgSrc": "https://www.fsnews.co.kr/news/photo/202207/46085_38609_3827.jpg",
+            "title": "마늘",
+            "checked": true
         },
         {
-          id: 7,
-          imgSrc: 'https://health.chosun.com/site/data/img_dir/2023/01/11/2023011101791_0.jpg',
-          title: '밥',
-          checked: true,
+            "id": 6,
+            "imgSrc": "https://dimg.donga.com/wps/NEWS/IMAGE/2022/09/14/115451847.2.jpg",
+            "title": "버섯",
+            "checked": true
         },
         {
-          id: 8,
-          imgSrc: 'https://cdn.mkhealth.co.kr/news/photo/202106/53426_54835_622.jpg',
-          title: '양파',
-          checked: true,
+            "id": 7,
+            "imgSrc": "https://cdn.kormedi.com/wp-content/uploads/2022/07/gettyimages-1312497207.jpg",
+            "title": "양파",
+            "checked": true
         },
-      ]);
-      
-    const navigate = useNavigate();
-
-    const handleCancelClick = () => {
-    navigate("/home");
-    };
-    
-    //개별로 체크 true/false가 가능하도록 함
-    const handleCheckboxChange = (id) => {
-        const updatedIngredients = ingredients.map((ingredient) =>
-          ingredient.id === id ? { ...ingredient, checked: !ingredient.checked } : ingredient
-        );
-        setIngredients(updatedIngredients); // 변경된 재료 목록으로 업데이트
-    };
-
-    const handleAddOpen = () => {
-        setAddOpen(true);
-      };
-    
-      const handleAddCancel = () => {
-        setAddOpen(false);
-      };
-
+        {
+            "id": 8,
+            "imgSrc": "https://cdn.huffingtonpost.kr/news/photo/201601/21945_42769.jpeg",
+            "title": "감자",
+            "checked": true
+        },
+        {
+            "id": 9,
+            "imgSrc": "https://res.heraldm.com/phpwas/restmb_idxmake.php?idx=507&simg=/content/image/2019/05/19/20190519000031_0.jpg",
+            "title": "애호박",
+            "checked": true
+        }
+    ];
 
     return(
-        
-      <div className="flex flex-wrap w-full items-center text-center h-screen pt-3 place-items-center">
-       {addOpen && (
-      <div className="fixed left-0 top-0 w-screen h-screen flex justify-center items-center bg-black bg-opacity-70">
-        <div className="bg-white rounded shadow-lg w-10/12 md:w-1/3">
-          <Add handleAddCancel={handleAddCancel} />
-        </div>
-      </div>
-    )}
-        <h1 className="w-full">인식한 재료가 일치한가요?</h1>
-        {/* 각 재료 사진 */}
-        <div className="w-full h-3/5 p-1 overflow-y-auto">
-        {ingredients.map((ingredient) => (
-          <div key={ingredient.id} className="w-full h-1/12 p-1 items-center">
-            <div className="text-center  flex flex-row items-center justify-center">
-            <div>
-              <img src={ingredient.imgSrc} className="max-w-60 h-10 object-cover" alt="인식된 재료" />
-            </div>
-            <h5 className="text-sm font-normal mt-2 pl-3">{ingredient.title}</h5>
-            <input className="mt-2 ml-2" type="checkbox" checked={ingredient.checked} onChange={() => handleCheckboxChange(ingredient.id)}/>
-            </div>
-          </div>
-        ))}
+      <>
+          <div className="flex flex-col justify-center items-center h-screen">
+              <h2 className="mb-4 text-3xl font-semibold text-gray-900 dark:text-white">
+                  인식된 재료가 일치한가요?{" "}
+              </h2>
+              {/*<h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-white">*/}
+              {/*    <div>{typeof data}</div>*/}
+              {/*    {data}*/}
+              {/*</h2>*/}
+              <div className="flex flex-col">
+                  <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                      <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                          <div className="overflow-y-auto max-h-96">
+                              <table className="min-w-full text-center">
+                                  <thead className="border-b">
+                                  <tr className="border-b bg-green-100 border-green-200">
+                                      <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4">
+                                          재료 이미지
+                                      </th>
+                                      <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4">
+                                          재료명
+                                      </th>
+                                      <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4">
+                                          갯수
+                                      </th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  {Object.keys(JSON.parse(data)).map((ingredient, index) => {
+                                      const matchingIngredient = ingredientsJSON.find(
+                                          (item) => item.title === ingredient
+                                      );
 
-        </div>
-      </div>
+                                      return (
+                                          <tr className="border-b bg-gray-50 border-gray-200" key={index}>
+                                              <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                                                  <div className="flex items-center justify-center">
+                                                      <img
+                                                          src={matchingIngredient ? matchingIngredient.imgSrc : ''}
+                                                          className="w-10 h-5 object-cover"
+                                                          alt="인식된 재료"
+                                                      />
+                                                  </div>
+                                              </td>
+                                              <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                  <div>{ingredient}</div>
+                                              </td>
+                                              <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                  {JSON.parse(data)[ingredient]}
+                                              </td>
+                                          </tr>
+                                      );
+                                  })}
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div className="my-4">
+                  <button
+                      type="button"
+                      className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-2xl px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                  >
+                     수정하기
+                  </button>
+              </div>
+              <div>
+                  <button
+                      type="button"
+                      className="mt-auto focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-2xl px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                  >
+                      보관함에 저장
+                  </button>
+                  <button
+                      type="button"
+                      className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-2xl px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                      onClick={() => {
+                          window.ReactNativeWebView.postMessage(
+                              JSON.stringify("웹뷰 종료!")
+                          );
+                          setIsLoading(true); // 로딩을 다시 표시
+                          setData(null); // 데이터 값 초기화
+                      }}
+                  >
+                      돌아가기
+                  </button>
+              </div>
+          </div>
+      </>
     );
   };
 
