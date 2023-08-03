@@ -139,6 +139,13 @@ const IngredientCheck = ({ data, setData, setIsLoading }) => {
                   <button
                       type="button"
                       className="mt-auto focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-2xl px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                      onClick={() => {
+                          window.ReactNativeWebView.postMessage(
+                              JSON.stringify("save")
+                          );
+                          setIsLoading(true); // 로딩을 다시 표시
+                          setData(null); // 데이터 값 초기화
+                      }}
                   >
                       보관함에 저장
                   </button>
@@ -147,7 +154,7 @@ const IngredientCheck = ({ data, setData, setIsLoading }) => {
                       className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-2xl px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                       onClick={() => {
                           window.ReactNativeWebView.postMessage(
-                              JSON.stringify("웹뷰 종료!")
+                              JSON.stringify("webviewExit")
                           );
                           setIsLoading(true); // 로딩을 다시 표시
                           setData(null); // 데이터 값 초기화

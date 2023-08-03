@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import GetImage from './pages/imageRecog/GetImage';
 import Login from "./pages/login/Login";
 import LoginAuth from "./pages/login/LoginAuth";
-import Collect from './pages/Collect';
+import Collect from './pages/Inventory/Collect';
 import IngredientCheck from './pages/imageRecog/IngredientCheck';
 
 

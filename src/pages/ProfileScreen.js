@@ -56,6 +56,9 @@ const ProfileScreen = () => {
 
   return (
     <div style={{ width: '100%', height: '100%', backgroundColor: 'white'}}>
+      <div className="px-1 py-4">
+        <h3 className="font-bold text-2xl font-sans ml-5">프로필</h3>
+      </div>
       <div style={{ width: '100%', padding: 20 }}>
 
         {/* 유저 프로필 상단 */}

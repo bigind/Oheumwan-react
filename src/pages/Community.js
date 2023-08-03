@@ -109,43 +109,46 @@ const Community = () => {
   
   return (
     <div className='bg-white items-center flex-1'>
-      <div className='w-full'>
-        <div className='text-right'>
-          {!modalOpen && (
-            <button className='w-1/12 pt-3' onClick={() => setModalOpen(true)}>✏️</button>)}
+        <div className="px-1 py-4">
+            <h3 className="font-bold text-2xl font-sans ml-5">커뮤니티</h3>
+            <div className='w-full'>
+                <div className='text-right'>
+                    {!modalOpen && (
+                        <button className='w-1/12 pt-3' onClick={() => setModalOpen(true)}>✏️</button>)}
+                </div>
+            </div>
+            {modalOpen && (
+                <Post
+                    setModalOpen={setModalOpen}
+                    handleImageUpload={handleImageUpload}
+                    handleContentChange={handleContentChange}
+                    handlePostSubmit={handlePostSubmit}
+                />
+            )}
+
+            <div className='text-left'>
+                {!modalOpen && (
+                    <div>
+                        {post.map((item) => ( //get으로 가져온 D 출력
+                            <Card
+                                key={item.post_id}
+                                src={item.image_path}
+                                likes="0"
+                                content={item.content}
+                                creationDate={item.creation_date}
+                                // handlerEditSubmit={handlerEditSubmit}
+                                // handlerEdit={handlerEdit}
+                                handlerRemove={() => handlerRemove(item.post_id)} // post_id를 prop 전달
+                                handlerEdit={(item) => handlerEdit(item)}
+                                selected={selected}
+                                username={username}
+                            />
+                        ))}
+
+                    </div>
+                )}
+            </div>
         </div>
-      </div>
-      {modalOpen && (
-        <Post
-          setModalOpen={setModalOpen}
-          handleImageUpload={handleImageUpload}
-          handleContentChange={handleContentChange}
-          handlePostSubmit={handlePostSubmit}
-        />
-      )}
-
-      <div className='text-left'>
-        {!modalOpen && (
-          <div>
-            {post.map((item) => ( //get으로 가져온 D 출력
-              <Card
-                key={item.post_id}
-                src={item.image_path} 
-                likes="0"
-                content={item.content}
-                creationDate={item.creation_date}
-                // handlerEditSubmit={handlerEditSubmit}
-                // handlerEdit={handlerEdit}
-                handlerRemove={() => handlerRemove(item.post_id)} // post_id를 prop 전달
-                handlerEdit={(item) => handlerEdit(item)}
-                selected={selected}
-                username={username}
-              />
-            ))}
-
-          </div>
-        )}
-      </div>
     </div>
   );
 };
