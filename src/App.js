@@ -4,11 +4,11 @@ import Router from './pages/Router';
 import ProfileScreen from './pages/ProfileScreen';
 import Community from './pages/Community';
 import Home from './pages/Home';
-import GetImage from './pages/GetImage';
+import GetImage from './pages/imageRecog/GetImage';
 import Login from "./pages/login/Login";
 import LoginAuth from "./pages/login/LoginAuth";
 import Collect from './pages/Collect';
-import Check from './pages/Check';
+import IngredientCheck from './pages/imageRecog/IngredientCheck';
 
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
              <Route path="/login" element={<Login/>}></Route>
              <Route path="/auth" element={<LoginAuth/>}></Route>
              <Route path="/collect" element={<Collect/>}></Route>
-             <Route path="/check" element={<Check/>}></Route>
+             <Route path="/check" element={<IngredientCheck/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>

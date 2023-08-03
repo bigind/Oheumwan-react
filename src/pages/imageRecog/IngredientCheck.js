@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import Add from "../components/Add";
+import Add from "../../components/Add";
 
-const Check = () => {
+const IngredientCheck = () => {
     //재료 리스트(이미지 예시)
     const [addOpen, setAddOpen] = useState(false);
 
@@ -80,15 +80,10 @@ const Check = () => {
         setAddOpen(false);
       };
 
-    
-
-  
-      
 
     return(
         
-      <div className="flex flex-wrap w-full items-center text-center h-screen pt-3
-      place-items-center">
+      <div className="flex flex-wrap w-full items-center text-center h-screen pt-3 place-items-center">
        {addOpen && (
       <div className="fixed left-0 top-0 w-screen h-screen flex justify-center items-center bg-black bg-opacity-70">
         <div className="bg-white rounded shadow-lg w-10/12 md:w-1/3">
@@ -110,18 +105,10 @@ const Check = () => {
             </div>
           </div>
         ))}
-        
-      </div>
-        <div className="w-full items-center flex justify-center">
-            <div className="w-3/5 h-8 flex justify-between ">
-            <button className="border border-2 border-solid rounded-lg w-10" onClick={handleAddOpen}>추가</button>
-            <button className="border border-2 border-solid rounded-lg w-10">저장</button>
-            <button className="border border-2 border-solid rounded-lg w-10" onClick={handleCancelClick}>취소</button>
-            </div>
+
         </div>
-        
       </div>
     );
   };
 
-export default Check;
+export default IngredientCheck;

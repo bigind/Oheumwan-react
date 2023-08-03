@@ -122,13 +122,6 @@ const Router = () => {
                     </div>
                 </div>
             </div>
-            {/* <div>
-                <h2>Home</h2>
-                <ul>
-                    <li></li>
-                </ul>
-            </div> */}
-
         </>
     );
 };
