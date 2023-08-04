@@ -1,8 +1,14 @@
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Add from "../../components/Add";
+import { AiOutlinePlusCircle, AiOutlineMinusCircle, AiOutlineMinus } from "react-icons/ai";
+
 
 const IngredientCheck = ({ data, setData, setIsLoading }) => {
+    const [IngData, setIngData] = useState(JSON.parse(data));
+
+    const [sendData, setSendData] = useState([]);
+
 
     const ingredientsJSON = [
         {
@@ -67,105 +73,116 @@ const IngredientCheck = ({ data, setData, setIsLoading }) => {
         }
     ];
 
-    return(
-      <>
-          <div className="flex flex-col justify-center items-center h-screen">
-              <h2 className="mb-4 text-3xl font-semibold text-gray-900 dark:text-white">
-                  인식된 재료가 일치한가요?{" "}
-              </h2>
-              {/*<h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-white">*/}
-              {/*    <div>{typeof data}</div>*/}
-              {/*    {data}*/}
-              {/*</h2>*/}
-              <div className="flex flex-col">
-                  <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                      <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                          <div className="overflow-y-auto max-h-96">
-                              <table className="min-w-full text-center">
-                                  <thead className="border-b">
-                                  <tr className="border-b bg-green-100 border-green-200">
-                                      <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4">
-                                          재료 이미지
-                                      </th>
-                                      <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4">
-                                          재료명
-                                      </th>
-                                      <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4">
-                                          갯수
-                                      </th>
-                                  </tr>
-                                  </thead>
-                                  <tbody>
-                                  {Object.keys(JSON.parse(data)).map((ingredient, index) => {
-                                      const matchingIngredient = ingredientsJSON.find(
-                                          (item) => item.title === ingredient
-                                      );
 
-                                      return (
-                                          <tr className="border-b bg-gray-50 border-gray-200" key={index}>
-                                              <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                                  <div className="flex items-center justify-center">
-                                                      <img
-                                                          src={matchingIngredient ? matchingIngredient.imgSrc : ''}
-                                                          className="w-10 h-5 object-cover"
-                                                          alt="인식된 재료"
-                                                      />
-                                                  </div>
-                                              </td>
-                                              <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                  <div>{ingredient}</div>
-                                              </td>
-                                              <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                  {JSON.parse(data)[ingredient]}
-                                              </td>
-                                          </tr>
-                                      );
-                                  })}
-                                  </tbody>
-                              </table>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div className="my-4">
-                  <button
-                      type="button"
-                      className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-2xl px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                  >
-                     수정하기
-                  </button>
-              </div>
-              <div>
-                  <button
-                      type="button"
-                      className="mt-auto focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-2xl px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                      onClick={() => {
-                          window.ReactNativeWebView.postMessage(
-                              JSON.stringify("save")
-                          );
-                          setIsLoading(true); // 로딩을 다시 표시
-                          setData(null); // 데이터 값 초기화
-                      }}
-                  >
-                      보관함에 저장
-                  </button>
-                  <button
-                      type="button"
-                      className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-2xl px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                      onClick={() => {
-                          window.ReactNativeWebView.postMessage(
-                              JSON.stringify("webviewExit")
-                          );
-                          setIsLoading(true); // 로딩을 다시 표시
-                          setData(null); // 데이터 값 초기화
-                      }}
-                  >
-                      돌아가기
-                  </button>
-              </div>
-          </div>
-      </>
+    return (
+        <>
+            <div className="flex flex-col justify-center items-center h-screen">
+                <h2 className="mb-4 text-3xl font-semibold text-gray-900 dark:text-white">
+                    인식된 재료가 일치한가요?{" "}
+                </h2>
+                {/* <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-white">
+                    <div>{JSON.stringify(IngData)}</div>
+                </h2> */}
+                <div className="flex flex-col">
+                    <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                            <div className="overflow-y-auto max-h-96">
+                                <table className="min-w-full text-center">
+                                    <thead className="border-b">
+                                        <tr className="border-b bg-green-100 border-green-200">
+                                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4">
+                                                재료 이미지
+                                            </th>
+                                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4">
+                                                재료명
+                                            </th>
+                                            <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4">
+                                                갯수
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {Object.keys(IngData).map((ingredient, index) => {
+                                            const matchingIngredient = ingredientsJSON.find(
+                                                (item) => item.title === ingredient
+                                            );
+
+                                            return (
+                                                <tr className="border-b bg-gray-50 border-gray-200" key={index}>
+
+                                                    <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap flex">
+                                                        <button
+                                                            className="mr-3 cursor-default"
+                                                        ><AiOutlineMinusCircle onClick={() => {
+                                                            const updatedIngData = { ...IngData };
+                                                            delete updatedIngData[ingredient];
+                                                            setIngData(updatedIngData);
+                                                        }} />
+                                                        </button>
+                                                        <div className="flex items-center justify-center">
+                                                            <img
+                                                                src={matchingIngredient ? matchingIngredient.imgSrc : ''}
+                                                                className="w-10 h-5 object-cover"
+                                                                alt="인식된 재료"
+                                                            />
+                                                        </div>
+                                                    </td>
+                                                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                        <div>{ingredient}</div>
+                                                    </td>
+                                                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap flex">
+                                                        <div className="input-number-group flex justify-center items-center">
+                                                            <button className="w-full input-number-decrement h-5 w-5 bg-white border border-gray-300 text-xl font-bold rounded" onClick={() => { }}>
+                                                                -
+                                                            </button>
+                                                            <div className="num h-5 w-5 border border-gray-300 text-xl flex items-center justify-center">
+                                                                {IngData[ingredient]}
+                                                            </div>
+                                                            <button className="input-number-increment h-5 w-5 bg-white border border-gray-300 text-xl font-bold rounded" onClick={() => { }}>
+                                                                +
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="my-4">
+                    <button
+                        type="button"
+                        className="mt-auto focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-2xl px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                        onClick={() => {
+                            window.ReactNativeWebView.postMessage(
+                                JSON.stringify("save")
+                            );
+                            setIsLoading(true); // 로딩을 다시 표시
+                            setData(null); // 데이터 값 초기화
+                        }}
+                    >
+                        보관함에 저장
+                    </button>
+                    <button
+                        type="button"
+                        className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-2xl px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                        onClick={() => {
+                            window.ReactNativeWebView.postMessage(
+                                JSON.stringify("webviewExit")
+                            );
+                            setIsLoading(true); // 로딩을 다시 표시
+                            setData(null); // 데이터 값 초기화
+                        }}
+                    >
+                        돌아가기
+                    </button>
+                </div>
+            </div>
+        </>
     );
-  };
+};
 
 export default IngredientCheck;

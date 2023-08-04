@@ -25,7 +25,7 @@ const ImageLoading = () => {
     return (
         <div className="flex justify-center items-center h-screen">
             <div>
-                <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-white">잠시만 기다려 주세요. (10초 정도 소요됨) </h2>
+                <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-white">잠시만 기다려 주세요. </h2>
                 <ul className="max-w-md space-y-2 text-gray-500 list-inside dark:text-gray-400">
                     {!load1 ?
                         <li className="flex items-center">
