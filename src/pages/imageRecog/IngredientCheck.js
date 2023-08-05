@@ -132,13 +132,23 @@ const IngredientCheck = ({ data, setData, setIsLoading }) => {
                                                     </td>
                                                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap flex">
                                                         <div className="input-number-group flex justify-center items-center">
-                                                            <button className="w-full input-number-decrement h-5 w-5 bg-white border border-gray-300 text-xl font-bold rounded" onClick={() => { }}>
+                                                            <button className="w-full input-number-decrement h-5 w-5 bg-white border border-gray-300 text-xl font-bold rounded" onClick={() => {
+                                                                const updatedIngData = { ...IngData };
+                                                                if(IngData[ingredient] === 1) return;
+                                                                updatedIngData[ingredient] = IngData[ingredient] - 1;
+                                                                setIngData(updatedIngData);
+                                                            }}>
                                                                 -
                                                             </button>
-                                                            <div className="num h-5 w-5 border border-gray-300 text-xl flex items-center justify-center">
+                                                            <div className="mr-2 ml-2 num h-5 w-5 border border-gray-300 text-xl flex items-center justify-center">
                                                                 {IngData[ingredient]}
                                                             </div>
-                                                            <button className="input-number-increment h-5 w-5 bg-white border border-gray-300 text-xl font-bold rounded" onClick={() => { }}>
+                                                            <button className="w-full input-number-increment h-5 w-5 bg-white border border-gray-300 text-xl font-bold rounded" onClick={() =>  {
+                                                                const updatedIngData = { ...IngData };
+                                                                updatedIngData[ingredient] = IngData[ingredient] + 1;
+                                                                setIngData(updatedIngData);
+                                                            } }>
+
                                                                 +
                                                             </button>
                                                         </div>
