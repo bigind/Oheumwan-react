@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Add from "../../components/Add";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle, AiOutlineMinus } from "react-icons/ai";
+import axios from "axios";
 
 
 const IngredientCheck = ({ data, setData, setIsLoading }) => {
@@ -97,7 +98,7 @@ const IngredientCheck = ({ data, setData, setIsLoading }) => {
                                                 재료명
                                             </th>
                                             <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4">
-                                                갯수
+                                                수량
                                             </th>
                                         </tr>
                                     </thead>
@@ -109,7 +110,7 @@ const IngredientCheck = ({ data, setData, setIsLoading }) => {
 
                                             return (
                                                 <tr className="border-b bg-gray-50 border-gray-200" key={index}>
-
+                                                    {/* 재료 이미지 */}
                                                     <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap flex">
                                                         <button
                                                             className="mr-3 cursor-default"
@@ -127,9 +128,11 @@ const IngredientCheck = ({ data, setData, setIsLoading }) => {
                                                             />
                                                         </div>
                                                     </td>
+                                                    {/* 재료 */}
                                                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                         <div>{ingredient}</div>
                                                     </td>
+                                                    {/* 수량 */}
                                                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap flex">
                                                         <div className="input-number-group flex justify-center items-center">
                                                             <button className="w-full input-number-decrement h-5 w-5 bg-white border border-gray-300 text-xl font-bold rounded" onClick={() => {
@@ -168,11 +171,25 @@ const IngredientCheck = ({ data, setData, setIsLoading }) => {
                         className="mt-auto focus:outline-none text-stone-800 bg-white hover:bg-stone-200 
                         border border-2 border-solid focus:ring-4 focus:ring-stone-300 font-medium rounded-lg text-xl px-2 py-3 mr-2 mb-2 "
                         onClick={() => {
-                            window.ReactNativeWebView.postMessage(
-                                JSON.stringify("save")
-                            );
-                            setIsLoading(true); // 로딩을 다시 표시
-                            setData(null); // 데이터 값 초기화
+                            // 서버로 유저의 보관함이으로 재료가 추가되도록 요청
+                            axios.post("https://xs21gvtq40.execute-api.eu-central-1.amazonaws.com/oheumwan/ingredient",{
+                                user_id : 2,
+                                ingredients : IngData
+                            })
+                                .then((res) => {
+                                    alert(JSON.stringify(res.data.body))
+                                })
+                                .catch((err) => {
+                                    alert(err)
+                                })
+                            // 앱으로 save 메시지 전송
+                            // window.ReactNativeWebView.postMessage(
+                            //     JSON.stringify("save")
+                            // );
+                            //
+                            // // 값 초기화
+                            // setIsLoading(true); // 로딩을 다시 표시
+                            // setData(null); // 데이터 값 초기화
                         }}
                     >
                         보관함에 저장

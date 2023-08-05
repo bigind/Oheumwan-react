@@ -1,9 +1,35 @@
+import {useEffect} from "react";
+
 const Login = () => {
     const Rest_api_key='a467cb476cd5ac847ed6ce10094ddfcf' //REST API KEY
     const redirect_uri = 'http://localhost:3000/auth' //Redirect URI
 
     // oauth 요청 URL
     const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&redirect_uri=${redirect_uri}&response_type=code`
+
+    // useEffect로 유저정보를 가져오는 코드
+    // 여기서 가져와서 State에 넣기
+    useEffect(() => {
+        const userAgent = navigator.userAgent;
+        const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
+        const receiver = isIOS ? window : document;
+
+        const handleMessage = (event) => {
+            const data = JSON.parse(event.data);
+
+            if (data) {
+                sessionStorage.setItem("token", data);
+            }
+        };
+
+        // receiver를 사용하여 플랫폼에 따른 로직을 처리
+        receiver.addEventListener("message", handleMessage);
+
+        // 컴포넌트 언마운트 시 이벤트 리스너를 정리
+        return () => {
+            receiver.removeEventListener("message", handleMessage);
+        };
+    }, []);
 
     return(
         <>

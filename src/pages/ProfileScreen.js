@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProfileTab, { ProfileBody, ProfileButtons } from '../components/ProfileBody';
 import EditProfile from '../components/EditProfile';
 
@@ -11,9 +11,6 @@ const ProfileScreen = () => {
   const [userPostConut, setUserPostConut] = useState(500);
 
   const [editProfile, setEditProfile] = useState(false);
-
-  // useEffect로 유저정보를 가져오는 코드
-  // 여기서 가져와서 State에 넣기
 
   for (let index = 0; index < numberofcircels; index++) {
     circuls.push(
@@ -60,6 +57,7 @@ const ProfileScreen = () => {
         <h3 className="font-bold text-2xl font-sans ml-5">프로필</h3>
       </div>
       <div style={{ width: '100%', padding: 20 }}>
+          {sessionStorage.getItem("token")}
 
         {/* 유저 프로필 상단 */}
         <ProfileBody
