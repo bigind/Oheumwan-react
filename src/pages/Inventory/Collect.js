@@ -1,11 +1,12 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {ingredientsJSON} from "../../utils/ingredients";
+import IngredientMenu from "./IngredientMenu";
 
 const Collect = () => {
 
     const [ingredients, setIngredients] = useState([]);  // 서버에서 가져온 유저의 재료
-    const [isIngredientMenu, setIngredientMenu] = useState(true);
+    const [isMenu, setMenu] = useState(true);
     const [selectIngredients, setSelectIngredients] = useState([]);
 
     useEffect(() => {
@@ -22,15 +23,6 @@ const Collect = () => {
             });
     }, []);
 
-    // 이미지를 클릭 시 selectImage 리스트에 추가 또는 삭제
-    const selectIngredient = (ingredient) => {
-        if (selectIngredients.includes(ingredient)) {
-            setSelectIngredients(prevIngredients => prevIngredients.filter(item => item !== ingredient));
-        } else {
-            setSelectIngredients(prevIngredients => [...prevIngredients, ingredient]);
-        }
-    };
-
     return (
         <>
             <div className="px-1 py-4">
@@ -42,9 +34,10 @@ const Collect = () => {
                 onChange={(e) => {
                     const selectedValue = e.target.value;
                     if (selectedValue === "ingredient") {
-                        setIngredientMenu(true);
+                        setMenu(true);  // 재료 보관함 표시
+                        setSelectIngredients([]);
                     } else if (selectedValue === "recipe") {
-                        setIngredientMenu(false);
+                        setMenu(false); // 레시피 보관함 표시
                     }
                 }}
             >
@@ -52,33 +45,8 @@ const Collect = () => {
                 <option value="recipe">레시피</option>
             </select>
 
-            {isIngredientMenu ? (
-                <>
-                    <ul className="grid grid-cols-5 gap-3 px-5 mt-5">
-                        {ingredients && ingredients.map(([ingredient, quantity]) => {
-                            // ingredientsJSON에서 title에 해당하는 항목 찾기
-                            const foundIngredient = ingredientsJSON.find(item => item.title === ingredient);
-
-                            return (
-                                <li className="flex items-center flex-col" key={ingredient} onClick={() => selectIngredient(ingredient)}>
-                                    <img src={selectIngredients.includes(ingredient) ?
-                                        "https://png.pngtree.com/element_our/20190523/ourlarge/pngtree-green-checkmark-error-image_1082147.jpg" :
-                                        foundIngredient ? foundIngredient.imgSrc : ''} alt="" className="rounded-full w-16 h-16 object-cover" />
-                                    <h5 className="font-semibold">{ingredient} x{quantity}</h5>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                    <div className="my-4 ml-5 pt-10">
-                        <button
-                            type="button"
-                            className="focus:outline-none text-white bg-black hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-2xl px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                        >
-                            레시피 추천
-
-                        </button>
-                    </div>
-                </>
+            {isMenu ? (
+                <IngredientMenu ingredients={ingredients} selectIngredients={selectIngredients} setSelectIngredients={setSelectIngredients}/>
             ) :(
                 <ul className="grid grid-cols-5 gap-3 px-5 mt-5">
                     <li className="flex items-center flex-col">
