@@ -2,6 +2,7 @@ import React from "react";
 
 function Home() {
     return (
+        
         <div className='bg-white items-center flex-1'>
             <div className="px-1 py-4">
                 <h3 className="font-bold text-2xl font-sans ml-5">통계</h3>
