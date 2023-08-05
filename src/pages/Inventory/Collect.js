@@ -1,5 +1,22 @@
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 const Collect = () => {
+
+  const [ingredients, setIngredients] = useState(null);
+
+  useEffect(() => {
+    axios.get('https://xs21gvtq40.execute-api.eu-central-1.amazonaws.com/oheumwan/ingredient?user_id=1')
+        .then((res) => {
+          const data = JSON.parse(res.data.body);
+          console.log(typeof data.ingredients);
+          setIngredients(JSON.stringify(data.ingredients));
+        })
+        .catch((err) => {
+          alert(err);
+        })
+  }, []);
+
   const ingredientsJSON = [
     {
       "id": 0,
@@ -120,6 +137,9 @@ const Collect = () => {
         >
           레시피 추천
         </button>
+      </div>
+      <div>
+        {ingredients}
       </div>
     </>
   );

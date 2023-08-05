@@ -182,14 +182,15 @@ const IngredientCheck = ({ data, setData, setIsLoading }) => {
                                 .catch((err) => {
                                     alert(err)
                                 })
+
                             // 앱으로 save 메시지 전송
-                            // window.ReactNativeWebView.postMessage(
-                            //     JSON.stringify("save")
-                            // );
-                            //
-                            // // 값 초기화
-                            // setIsLoading(true); // 로딩을 다시 표시
-                            // setData(null); // 데이터 값 초기화
+                            window.ReactNativeWebView.postMessage(
+                                JSON.stringify("save")
+                            );
+
+                            // 값 초기화
+                            setIsLoading(true); // 로딩을 다시 표시
+                            setData(null); // 데이터 값 초기화
                         }}
                     >
                         보관함에 저장
