@@ -119,9 +119,6 @@ const Collect = () => {
             레시피 추천
           </button>
         </div>
-        {/*<div>*/}
-        {/*  {ingredients}*/}
-        {/*</div>*/}
       </>
   );
 };

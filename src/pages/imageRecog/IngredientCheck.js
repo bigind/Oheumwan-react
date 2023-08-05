@@ -173,21 +173,23 @@ const IngredientCheck = ({ data, setData, setIsLoading }) => {
                         onClick={() => {
                             // 서버로 유저의 보관함이으로 재료가 추가되도록 요청
                             axios.post("https://xs21gvtq40.execute-api.eu-central-1.amazonaws.com/oheumwan/ingredient",{
-                                user_id : 2,
+                                user_id : 1,
                                 ingredients : IngData
                             })
                                 .then((res) => {
-                                    alert(JSON.stringify(res.data.body))
+                                    console.log(JSON.stringify(res.data.body))
+
+                                    // 앱으로 save 메시지 전송
+                                    window.ReactNativeWebView.postMessage(
+                                        JSON.stringify("save")
+                                    );
                                 })
                                 .catch((err) => {
-                                    alert(err)
+                                    // 앱으로 err 메시지 전송
+                                    window.ReactNativeWebView.postMessage(
+                                        JSON.stringify("err")
+                                    );
                                 })
-
-                            // 앱으로 save 메시지 전송
-                            window.ReactNativeWebView.postMessage(
-                                JSON.stringify("save")
-                            );
-
                             // 값 초기화
                             setIsLoading(true); // 로딩을 다시 표시
                             setData(null); // 데이터 값 초기화
@@ -201,7 +203,7 @@ const IngredientCheck = ({ data, setData, setIsLoading }) => {
                         border border-2 border-solid focus:ring-4 focus:ring-stone-300 font-medium rounded-lg text-xl px-2 py-3 mr-2 mb-2"
                         onClick={() => {
                             window.ReactNativeWebView.postMessage(
-                                JSON.stringify("webviewExit")
+                                JSON.stringify("exit")
                             );
                             setIsLoading(true); // 로딩을 다시 표시
                             setData(null); // 데이터 값 초기화
