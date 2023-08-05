@@ -9,6 +9,7 @@ import Login from "./pages/login/Login";
 import LoginAuth from "./pages/login/LoginAuth";
 import Collect from './pages/Inventory/Collect';
 import IngredientCheck from './pages/imageRecog/IngredientCheck';
+import CameraButton from './pages/CameraButton';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
              <Route path="/auth" element={<LoginAuth/>}></Route>
              <Route path="/collect" element={<Collect/>}></Route>
              <Route path="/check" element={<IngredientCheck/>}></Route>
+             <Route path="/camera" element={<CameraButton/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>
