@@ -5,7 +5,7 @@ import { AiOutlinePlusCircle, AiOutlineMinusCircle, AiOutlineMinus } from "react
 
 
 const IngredientCheck = ({ data, setData, setIsLoading }) => {
-    const [IngData, setIngData] = useState(JSON.parse(data));
+    const [IngData, setIngData] = useState(data ? JSON.parse(data) : {});
 
     const [sendData, setSendData] = useState([]);
 
@@ -89,7 +89,7 @@ const IngredientCheck = ({ data, setData, setIsLoading }) => {
                             <div className="overflow-y-auto max-h-96">
                                 <table className="min-w-full text-center">
                                     <thead className="border-b">
-                                        <tr className="border-b bg-green-100 border-green-200">
+                                        <tr className="border-b bg-stone-300 border-stone-200">
                                             <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4">
                                                 재료 이미지
                                             </th>
@@ -155,7 +155,8 @@ const IngredientCheck = ({ data, setData, setIsLoading }) => {
                 <div className="my-4">
                     <button
                         type="button"
-                        className="mt-auto focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-2xl px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                        className="mt-auto focus:outline-none text-stone-800 bg-white hover:bg-stone-200 
+                        border border-2 border-solid focus:ring-4 focus:ring-stone-300 font-medium rounded-lg text-xl px-2 py-3 mr-2 mb-2 "
                         onClick={() => {
                             window.ReactNativeWebView.postMessage(
                                 JSON.stringify("save")
@@ -168,7 +169,8 @@ const IngredientCheck = ({ data, setData, setIsLoading }) => {
                     </button>
                     <button
                         type="button"
-                        className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-2xl px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                        className="focus:outline-none text-stone-800 bg-white hover:bg-stone-200 
+                        border border-2 border-solid focus:ring-4 focus:ring-stone-300 font-medium rounded-lg text-xl px-2 py-3 mr-2 mb-2"
                         onClick={() => {
                             window.ReactNativeWebView.postMessage(
                                 JSON.stringify("webviewExit")
