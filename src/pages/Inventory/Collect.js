@@ -66,7 +66,7 @@ const Collect = () => {
                     {isRecommand ? (
                         <>
                             {/* 레시피 추천 페이지 */}
-                            <RecipeRecommend selectIngredients={selectIngredients} recipe={recipe} setRecommand={setRecommand}/>
+                            <RecipeRecommend recipe={recipe} selectIngredients={selectIngredients} setRecommand={setRecommand} />
                         </>
                     ):(
                         <>
@@ -77,7 +77,7 @@ const Collect = () => {
                             ) : (
                                 <>
                                     {/* 재료 목록 */}
-                                    <IngredientMenu ingredients={ingredients} selectIngredients={selectIngredients} setSelectIngredients={setSelectIngredients} setRecommand={setRecommand} setRecipe={setRecipe}/>
+                                    <IngredientMenu ingredients={ingredients} selectIngredients={selectIngredients} setSelectIngredients={setSelectIngredients} setRecipe={setRecipe} setRecommand={setRecommand}/>
                                 </>
                             )}
 

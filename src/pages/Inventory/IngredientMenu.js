@@ -2,16 +2,18 @@ import {ingredientsJSON} from "../../utils/ingredients";
 import axios from "axios";
 import React, {useState} from "react";
 
-const IngredientMenu = ({ingredients, selectIngredients, setSelectIngredients, setRecommand, setRecipe}) => {
+const IngredientMenu = ({ingredients, selectIngredients, setSelectIngredients, setRecipe, setRecommand}) => {
 
     const [isLoading, setLoading] = useState(null);
 
     // 이미지를 클릭 시 selectImage 리스트에 추가 또는 삭제
     const Select_Ingredient_handler = (ingredient) => {
-        if (selectIngredients.includes(ingredient)) {
-            setSelectIngredients(prevIngredients => prevIngredients.filter(item => item !== ingredient));
-        } else {
-            setSelectIngredients(prevIngredients => [...prevIngredients, ingredient]);
+        if(isLoading){}else{
+            if (selectIngredients.includes(ingredient)) {
+                setSelectIngredients(prevIngredients => prevIngredients.filter(item => item !== ingredient));
+            } else {
+                setSelectIngredients(prevIngredients => [...prevIngredients, ingredient]);
+            }
         }
     };
 
@@ -41,7 +43,7 @@ const IngredientMenu = ({ingredients, selectIngredients, setSelectIngredients, s
                         border border-2 border-solid focus:ring-4 focus:ring-stone-300 font-medium rounded-lg text-xl px-2 py-3 mr-2 mb-2 "
                         >
                             <svg className="h-5 w-5 animate-spin mr-1" fill="none" viewBox="0 0 24 24">
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                             </svg>
                             <span>추천을 받는중입니다...</span>
@@ -56,13 +58,15 @@ const IngredientMenu = ({ingredients, selectIngredients, setSelectIngredients, s
                         else {
                             setLoading(true);
                             console.log(selectIngredients);
+
+                            // AI 기반 레시피 가져오기
                             axios.post("https://xs21gvtq40.execute-api.eu-central-1.amazonaws.com/oheumwan/openai",{
                                 ingredient : selectIngredients
                             }).then((res) => {
                                 console.log(res.data);
                                 setRecipe(res.data.dish);
-                                setRecommand(true);
                                 setLoading(false);
+                                setRecommand(true);
                             }).catch((err) => {
                                 console.log(err);
                                 setLoading(false);
