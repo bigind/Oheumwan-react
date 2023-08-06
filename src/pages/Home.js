@@ -14,25 +14,25 @@ function Home() {
     useEffect(() => {
         axios.get("https://xs21gvtq40.execute-api.eu-central-1.amazonaws.com/oheumwan/data-graph")
             .then((res) => {
-                console.log(res.data.body)
-                setData(JSON.parse(res.data.body))
+                console.log(res.data.body);
+                setData(JSON.parse(res.data.body));
             })
             .catch((err) => {
-                console.log(err)
+                console.log(err);
             })
     }, [])
 
     return (
-        
-        <div className='bg-white items-center flex-1'>
-            <div className="px-1 py-4">
-                <h3 className="font-bold text-2xl font-sans ml-5">통계</h3>
-                <RadarChart
-                    cx={300}
-                    cy={250}
-                    outerRadius={150}
-                    width={1000}
-                    height={1000}
+        <div className='flex flex-col items-center justify-center h-screen bg-white overflow-hidden'>
+            <div className="w-full px-1 py-4 text-center">
+                <h3 className="font-bold text-2xl font-sans mb-5">통계</h3>
+
+                <RadarChart className="flex items-center justify-center"
+                    cx={180}
+                    cy={200}
+                    outerRadius={90}
+                    width={400}
+                    height={310}
                     data={data}
                 >
                     <PolarGrid />
@@ -47,20 +47,67 @@ function Home() {
                     />
                 </RadarChart>
             </div>
-
-
-
-            <div style={{ height: '100vh', width: '100%', textAlign: 'center', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'cover' }}>
-                {/*<h1 style={{ paddingTop: 50, fontSize: 30, fontFamily: 'Noto Serif KR, serif' }}>통계</h1>*/}
-                {/*<p style={{ paddingTop: 20 }}>statistics</p>*/}
-                {/*<img src="https://velog.velcdn.com/images/choichoijin/post/e6803bf9-084a-44bf-bf90-c1db4cf4cc61/image.png"/>*/}
-                {/*<h2 style={{paddingTop: 20, fontFamily: 'Noto Serif KR, serif' }}>20-30대 가장 많이 찾는 음식</h2>*/}
-                {/*<img src="img/graph.jpg"/>*/}
-                <p></p>
+            <div className="w-full items-center text-center px-1 py-4">
+                <div className="flex jusify-center items-center overflow-hidden">
+                    <table className="w-full border-solid border-collapse border text-xs">
+                        {/* <thead>
+                             {data && (
+                                <>
+                                    <tr>
+                                        {data.slice(0, 3).map((item, index) => (
+                                            <th key={index} className="border p-2">{item.subject}</th>
+                                        ))}
+                                    </tr>
+                                    <tr>
+                                        {data.slice(3, 6).map((item, index) => (
+                                            <th key={index} className="border p-2">{item.subject}</th>
+                                        ))}
+                                    </tr>
+                                </>
+                            )}
+                        </thead> */}
+                          <thead>
+                            <tr>
+                                {data && data.slice(0, 3).map((item, index) => (
+                                    <th key={index} className="border p-2">
+                                        {item.subject}
+                                    </th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                {data && data.slice(0, 3).map((item, index) => (
+                                    <td key={index} className="border p-2">
+                                        {item.A}
+                                    </td>
+                                ))}
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                {data && data.slice(3, 6).map((item, index) => (
+                                    <th key={index} className="border p-2">
+                                        {item.subject}
+                                    </th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                {data && data.slice(3, 6).map((item, index) => (
+                                    <td key={index} className="border p-2">
+                                        {item.A}
+                                    </td>
+                                ))}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
         </div>
-    )
+    );
 }
 
 export default Home;
