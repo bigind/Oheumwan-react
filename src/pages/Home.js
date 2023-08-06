@@ -28,7 +28,7 @@ function Home() {
                 <h3 className="font-bold text-2xl font-sans mb-5">통계</h3>
 
                 <RadarChart className="flex items-center justify-center"
-                    cx={180}
+                    cx={200}
                     cy={200}
                     outerRadius={90}
                     width={400}
