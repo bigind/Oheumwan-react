@@ -24,7 +24,7 @@ function Home() {
 
     return (
         <div className='flex flex-col items-center justify-start h-screen bg-white overflow-hidden'>
-            <div className="w-full px-1 py-4 text-center">
+            <div className="w-full px-1 py-4 ">
                 <h3 className="font-bold text-2xl font-sans mb-5">통계</h3>
 
                 <RadarChart className="flex items-center justify-center"
