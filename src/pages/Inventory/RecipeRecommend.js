@@ -83,13 +83,6 @@ const RecipeRecommend = ({recipe, setRecommand}) => {
                         type="button"
                         className="flex mt-5 focus:outline-none text-stone-800 bg-white hover:bg-stone-200
                         border border-2 border-solid focus:ring-4 focus:ring-stone-300 font-medium rounded-lg text-xl px-2 py-3 mr-2 mb-2 "
-                    >
-                        <span>추천 다시 받기</span>
-                    </button>
-                    <button
-                        type="button"
-                        className="flex mt-5 focus:outline-none text-stone-800 bg-white hover:bg-stone-200
-                        border border-2 border-solid focus:ring-4 focus:ring-stone-300 font-medium rounded-lg text-xl px-2 py-3 mr-2 mb-2 "
                         onClick={() => {setRecommand(false)}}
                     >
                         <span>돌아가기</span>
