@@ -23,13 +23,13 @@ function Home() {
     }, [])
 
     return (
-        <div className='flex flex-col items-center justify-center h-screen bg-white overflow-hidden'>
+        <div className='flex flex-col items-center justify-start h-screen bg-white overflow-hidden'>
             <div className="w-full px-1 py-4 text-center">
                 <h3 className="font-bold text-2xl font-sans mb-5">통계</h3>
 
                 <RadarChart className="flex items-center justify-center"
                     cx={200}
-                    cy={200}
+                    cy={150}
                     outerRadius={90}
                     width={400}
                     height={310}
