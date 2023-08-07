@@ -58,5 +58,59 @@ export const ingredientsJSON = [
         "imgSrc": "https://res.heraldm.com/phpwas/restmb_idxmake.php?idx=507&simg=/content/image/2019/05/19/20190519000031_0.jpg",
         "title": "애호박",
         "checked": true
+    },
+    {
+        "id": 10,
+        "imgSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Scomber_japonicus.png/220px-Scomber_japonicus.png",
+        "title": "생선",
+        "checked": true
+    },
+    {
+        "id": 11,
+        "imgSrc": "https://i.namu.wiki/i/y1vEkfKabfcqbF-qZ79SHA1UTT8j4V2VHltkcy5zXhz_bXaTYm_z3JRJikOf616oLd8ldnjQTYTV2wYneZabsg.webp",
+        "title": "햄",
+        "checked": true
+    },
+    {
+        "id": 12,
+        "imgSrc": "https://i.namu.wiki/i/VBcDkoPXajYoNcRUcVHQdfvB-Npe16B_s3ULp71MXsw2qcyVgvbZjQtQOFXKcZBn36hB1O07LSPkLYEKRtP5FA.webp",
+        "title": "고기",
+        "checked": true
+    },
+    {
+        "id": 13,
+        "imgSrc": "https://jmagazine.joins.com/_data/photo/2016/10/thumb_982476311_OzlZ8u27_EBB984ED8380EBAFBCCED8C8CEC9AB0EB8D94.jpg",
+        "title": "가루",
+        "checked": true
+    },
+    {
+        "id": 14,
+        "imgSrc": "https://img-cf.kurly.com/shop/data/goodsview/20220314/gv30000288794_1.jpg",
+        "title": "두부",
+        "checked": true
+    },
+    {
+        "id": 15,
+        "imgSrc": "https://blisgo.com/wp-content/uploads/elementor/thumbs/%EA%B3%A0%EC%B6%94-p4kx98o232hm6przkzkfux29mvvdhqi2jlpg0rkyrk.jpg",
+        "title": "고추",
+        "checked": true
+    },
+    {
+        "id": 16,
+        "imgSrc": "https://img.danawa.com/prod_img/500000/306/771/img/771306_1.jpg?_v=20230131144241",
+        "title": "김치",
+        "checked": true
+    },
+    {
+        "id": 17,
+        "imgSrc": "https://dimg.donga.com/wps/NEWS/IMAGE/2014/10/08/67042149.1.jpg",
+        "title": "피망",
+        "checked": true
+    },
+    {
+        "id": 18,
+        "imgSrc": "https://cdn.aflnews.co.kr/news/photo/201612/125752_8499_3111.jpg",
+        "title": "토마토",
+        "checked": true
     }
 ];

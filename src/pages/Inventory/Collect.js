@@ -18,6 +18,7 @@ const Collect = () => {
     const [isMenu, setMenu] = useState(true);
     const [isLoading, setLoading] = useState(false);  //
     const [isRecommand, setRecommand] = useState(false);
+    // const [isRecipeDetail, setRecipeDetail] = useState(false); // 레시피 디테일 트리거
     
 
     useEffect(() => {
